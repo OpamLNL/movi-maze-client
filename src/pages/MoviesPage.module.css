@@ -1,0 +1,46 @@
+.moviesListBlock{
+    margin-top: 10px;
+    max-width: 86%;
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.moviesListPage{
+    margin-top: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.filterRow{
+    height: 90%;
+    width: 100%;
+    margin-top: 5px;
+
+    background-color: #8d8998;
+
+    border-style: revert;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: space-around;
+    align-items: center;
+}
+
+.paginationRow{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: space-around;
+    align-items: center;
+}

@@ -1,0 +1,91 @@
+.gameCard{
+    height: 18vw;
+    max-width:29vh;
+    width: 15vw;
+
+    border-style: solid;
+    border-width: 2px;
+
+    margin: 5px 5px 55px 5px;
+    padding-top: 5px;
+    display: flex;
+
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.gameGenreBadge{
+    display: flex;
+    flex-direction: column;
+}
+
+.gameTitle{
+    display: flex;
+    flex-direction: column;
+
+    font-size: 1rem;
+}
+
+.gameMainContent{
+    width: 100%;
+    height: 0;
+    padding-top: 56.25%;
+    position: relative;
+
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.zoom {
+    transition: transform .2s; /* Animation */
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+
+    max-width: 100%;
+    height: auto;
+    display: block;
+    align-self: flex-end;
+    vertical-align: bottom;
+}
+
+.zoom:hover {
+    transform: scale(1.7);
+}
+
+.root {
+    flexGrow: 1;
+    padding: 2rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.content {
+    flexGrow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.media {
+    height: 0;
+    padding-top: 150%; /* 2:3 aspect ratio */
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+}
+
+.rating svg {
+    margin-right: 1rem;
+}

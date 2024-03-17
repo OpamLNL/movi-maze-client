@@ -1,0 +1,30 @@
+[
+    {
+        "id": "1",
+        "link": "/"
+    },
+    {
+        "id": "2",
+        "link": "/games"
+    },
+    {
+        "id": "3",
+        "link": "/about"
+    },
+    {
+        "id": "4",
+        "link": "/contact"
+    },
+    {
+        "id": "5",
+        "link": "/language"
+    },
+    {
+        "id": "6",
+        "link": "/sign-in"
+    },
+    {
+        "id": "7",
+        "link": "/sign-up"
+    }
+]

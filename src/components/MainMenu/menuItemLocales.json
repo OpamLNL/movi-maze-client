@@ -1,0 +1,52 @@
+[
+    {
+        "id": "1",
+        "label": {
+            "en-US" : "Home",
+            "uk-UA" : "Головна"
+        }
+    },
+    {
+        "id": "2",
+        "label": {
+            "en-US" : "Games",
+            "uk-UA" : "Ігри"
+        }
+    },
+    {
+        "id": "3",
+        "label": {
+            "en-US" : "About Us",
+            "uk-UA" : "Про нас"
+        }
+    },
+    {
+        "id": "4",
+        "label": {
+            "en-US" : "Contact",
+            "uk-UA" : "Контакти"
+        }
+    },
+    {
+        "id": "5",
+        "label": {
+            "en-US" : "Language",
+            "uk-UA" : "Мова"
+        }
+    },
+    {
+        "id": "6",
+        "label": {
+            "en-US" : "Sign in",
+            "uk-UA" : "Вхід"
+        }
+    },
+    {
+        "id": "7",
+        "label": {
+            "en-US" : "Sign up",
+            "uk-UA" : "Реєстрація"
+        }
+    }
+]
+
