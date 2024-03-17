@@ -5,14 +5,14 @@ export const lightTheme = createTheme({
         type: 'light',
 
         background: {
-            default: '#c6c0d4',
+            default: '#70828d',
 
         },
 
 
         primary: {
-            contrast: '#8d8998',
-            contrastText: '#f50057',
+            contrast: "rgb(119, 132, 119)",
+            contrastText: '#9fffcb',
             dark: "rgb(59, 71, 59)",
             light: "rgb(119, 132, 119)",
             main: "#556655"

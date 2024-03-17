@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     sidebar: {
         padding: "2px 2px 2px 2px",
         width: "98%",
-        color: theme.palette.text.primary,
+
         backgroundColor: theme.palette.background.paper,
     },
 }));
@@ -16,14 +16,9 @@ export const LeftSidebar = () => {
 
     const classes = useStyles();
     return (
-        <div className={classes.sidebar}>
-            <SectionContainer>
+            <SectionContainer title="Зараз на сайті">
                 <UserList />
-
-                <div className={css.sidebarItem}>Пункт меню 1</div>
-                <div className={css.sidebarItem}>Пункт меню 2</div>
             </SectionContainer>
-        </div>
     );
 };
 

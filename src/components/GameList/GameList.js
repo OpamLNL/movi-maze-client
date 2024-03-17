@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGames } from '../../store/reducers/games/gamesActions';
 import { selectGames, selectGamesLoading, selectGamesError } from '../../store/reducers/games/gamesSelectors';
+import {GameListItem} from "../ListItems";
 
 const GameList = () => {
     const dispatch = useDispatch();
@@ -10,7 +11,6 @@ const GameList = () => {
     const error = useSelector(selectGamesError);
 
     useEffect(() => {
-        // Викликайте action creator для отримання списку ігор при завантаженні компонента
         dispatch(fetchGames());
     }, [dispatch]);
 
@@ -26,10 +26,11 @@ const GameList = () => {
 
     return (
         <div>
-            <h2>Game List</h2>
             <ul>
                 {sortedGames && sortedGames.map((game) => (
-                    <li key={game.id}>{game.title} - {game.developer}</li>
+                    <GameListItem key={game.id}>
+                        {game.title} - {game.developer}
+                    </GameListItem>
                 ))}
             </ul>
         </div>
