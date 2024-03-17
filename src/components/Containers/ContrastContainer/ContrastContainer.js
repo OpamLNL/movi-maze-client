@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { ThemeContext } from '../../themes/theme-context';
+import { ThemeContext } from '../../../themes/theme-context';
 
 
 export const ContrastContainer = ({ title, text, children }) => {

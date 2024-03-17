@@ -3,7 +3,7 @@ export {ActiveUsersList} from './ActiveUsersList/ActiveUsersList';
 export {AvatarImage} from './AvatarImage/AvatarImage';
 export {Badge} from './Badge/Badge';
 export {Button} from './Button/Button';
-export {ContrastContainer} from "./ContrastContainer/ContrastContainer";
+export * from "./Containers";
 export {Filter} from './Filter/Filter';
 export {GameCard} from './GameCard/GameCard';
 export {GenreBadge} from './GenreBadge/GenreBadge';
@@ -20,7 +20,7 @@ export {MovieDetails} from './MovieDetails/MovieDetails';
 export {MoviesListCard} from './MoviesListCard/MoviesListCard';
 export {MoviesPagination} from './MoviesPagination/MoviesPagination';
 export {RightSidebar} from './RightSidebar/RightSidebar';
-export {Sidebar} from './Sidebar/Sidebar';
+export {LeftSidebar} from './LeftSidebar/LeftSidebar';
 export {StarsRating} from './StarsRating/StarsRating';
 
 export {ThemeSwitcher} from './ThemeSwitcher/ThemeSwitcher';

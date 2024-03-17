@@ -1,15 +1,29 @@
+.mainContent{
+    display: flex;
+    width: 98%;
+    margin-top: 1%;
+    justify-content: center;
+}
+
 .mainContainer {
     display: flex;
-    width: 95%;
+    flex-direction: row;
+    width: 98%;
+
+    justify-content: center;
+    align-items: start;
 }
 
-.sidebar {
-    flex: 0 0 250px;
-    background-color: #333;
-    color: #fff;
+.mainContainerCenter{
+    display: flex;
+    margin-top: 15px;
+    width: 65%;
+    justify-content: center;
 }
 
-.mainContent {
-    flex: 1;
-    padding: 20px;
+.mainContainerSides{
+    display: flex;
+    width: 15%;
+    justify-content: center;
 }
+
