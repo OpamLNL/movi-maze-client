@@ -48,7 +48,7 @@ const App = () => {
                                     <Routes>
                                         <Route index element={ <Navigate to={'home'} /> } />
                                         <Route path={'home'} element={<MainLayout/>}/>
-                                        <Route index element={ <Navigate to={'home'} /> } />
+                                        <Route index element={ <Navigate to={'games'} /> } />
                                         <Route path={'games'} element={<GameLayout/>}/>
 
 

@@ -1,9 +1,9 @@
-import {MoviesPage} from "../pages/MoviesPage";
+import LandingPage from "../pages/HomePage";
 
 const MainLayout = () => {
     return (
         <div>
-            <MoviesPage />
+            <LandingPage />
         </div>
     );
 };

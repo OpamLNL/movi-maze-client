@@ -1,12 +1,13 @@
 import css from './MainMenu.module.css';
-
+import {Link} from "react-router-dom";
 import { useContext } from 'react';
+
 import menuItemsLinks  from './menuItemLinks';
 import menuItemsLocales from './menuItemLocales';
 
 import { Button, Icon } from '../../components';
 import { LanguageContext } from "../../language/language-context";
-import {Link} from "react-router-dom";
+
 
 const MainMenu = () => {
 
