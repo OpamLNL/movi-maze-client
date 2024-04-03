@@ -21,6 +21,9 @@ export {MoviesListCard} from './MoviesListCard/MoviesListCard';
 export {MoviesPagination} from './MoviesPagination/MoviesPagination';
 export {RightSidebar} from './RightSidebar/RightSidebar';
 export {LeftSidebar} from './LeftSidebar/LeftSidebar';
+
+export {SearchBar} from './SearchBar/SearchBar';
+export {ServiceBar} from './ServiceBar/ServiceBar';
 export {StarsRating} from './StarsRating/StarsRating';
 
 export {ThemeSwitcher} from './ThemeSwitcher/ThemeSwitcher';

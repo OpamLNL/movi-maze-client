@@ -5,23 +5,19 @@ export const lightTheme = createTheme({
         type: 'light',
 
         background: {
-            default: '#70828d',
-
+            default: '#f0dcc5',
         },
-
 
         primary: {
-            contrast: "rgb(119, 132, 119)",
-            contrastText: '#9fffcb',
-            dark: "rgb(59, 71, 59)",
-            light: "rgb(119, 132, 119)",
-            main: "#556655"
+            contrastText: "#490000",
+            main: "#d3b6ab",
+            light: "#9d8977",
+            dark: "#ede0d4",
         },
         secondary: {
-            main: '#f50057',
+            main: '#d3c8bb',
         },
     },
-
 
     components: {
         MuiTypography: {
@@ -43,24 +39,25 @@ export const lightTheme = createTheme({
     },
 });
 
+
 export const darkTheme = createTheme({
     palette: {
         type: 'dark',
 
         background: {
-            default: '#1e1633',
+            default: '#3c3434',
 
         },
 
         primary: {
-            contrast: '#37295d',
             contrastText: '#FFB6C1',
-            dark: '#FFB6C1',
-            light: "rgb(119, 132, 119)",
-            main: "#556655"
+            main: "#9d9092",
+            dark: '#555555',
+            light: "#615353",
+
         },
         secondary: {
-            main: '#556655',
+            main: '#6f5e53',
         },
     },
 

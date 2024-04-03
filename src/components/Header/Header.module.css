@@ -1,13 +1,9 @@
 .header {
-    min-height: 10vw;
-    max-height: 15vw;
+    height: 12vw;
     width: 100%;
-    background-color: #281f43;
-    color: #C0AAAA;
     margin-top: 15px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
 }
 
 .headerMid {
@@ -31,6 +27,7 @@
 
 
 .headerLogo {
+    height: 120%;
     margin-left: 2vw;
     display: flex;
     justify-content: flex-start;

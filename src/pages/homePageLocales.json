@@ -1,14 +1,22 @@
 [
   {
     "welcome": {
-      "en-US" : "Welcome to Moving Games World",
-      "uk-UA" : "Вітаємо у світі рухливих ігор"
+      "en-US": "Welcome to Moving Games World",
+      "uk-UA": "Вітаємо Вас у світі рухливих ігор"
     }
   },
+
+  {
+    "subtitle": {
+      "en-US": "Explore a world of exciting mobile games and start playing now!",
+      "uk-UA": "Відкрийте для себе світ захоплюючих мобільних ігор і почніть грати зараз!"
+    }
+  },
+
   {
     "startButton": {
-      "en-US" : "Get Started",
-      "uk-UA" : "Розпочнімо"
+      "en-US": "Get Started",
+      "uk-UA": "Розпочнімо"
     }
   }
 ]

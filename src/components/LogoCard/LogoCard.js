@@ -1,35 +1,41 @@
-// LogoCard.js
-import React, { useContext } from 'react';
-import css from './LogoCard.module.css';
+import React from 'react';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { Grid, Typography } from '@mui/material';
+import { makeStyles } from '@material-ui/core/styles';
 import { AvatarImage, LanguageSwitcher, ThemeSwitcher } from '../../components';
-import { Typography } from '@mui/material';
-import { ThemeContext } from '../../themes/theme-context';
+import css from './LogoCard.module.css';
 
-const LogoCard = () => {
-    const { theme } = useContext(ThemeContext);
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        margin: "15px 2px 2px 2px",
+        padding: "10px",
+        width: "100%",
+        color: theme.palette.text.contrastText,
+        backgroundColor: theme.palette.secondary.main,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: "center",
+    },
+}));
+
+export const LogoCard = () => {
+    const classes = useStyles();
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
-        <div className={css.logoCard}>
-            <AvatarImage avatarUrl={'images/move-maze-logo.png'} />
-            <div className={css.logoCardText}>
-                <Typography
-                    component={theme.components.MuiTypography.defaultProps.variantMapping.subtitle1}
-                    color={theme.palette.primary.contrastText}
-                >
-                    <br />
-                    грай-рушай
-                </Typography>
-            </div>
+        <div className={`${classes.paper} ${css.logoCard}`}>
+            {!isMobile && <AvatarImage avatarUrl={'images/move-maze-logo.png'} className={css.avatar} />}
+            <Typography variant="h6" className={css.logoCardText}>
+                грай-рушай
+            </Typography>
             <div className={css.switchers}>
-                <div className={css.settingItem}>
-                    <ThemeSwitcher />
-                </div>
-                <div className={css.settingItem}>
-                    <LanguageSwitcher />
-                </div>
+
+
             </div>
         </div>
     );
 };
 
-export { LogoCard };
