@@ -1,18 +1,18 @@
-import React from 'react';
+import css from './LogoCard.module.css';
+
+import {Link} from "react-router-dom";
+
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { Grid, Typography } from '@mui/material';
 import { makeStyles } from '@material-ui/core/styles';
-import { AvatarImage, LanguageSwitcher, ThemeSwitcher } from '../../components';
-import css from './LogoCard.module.css';
+import { Typography } from '@mui/material';
+
+import { LogoImage } from '../../components';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        margin: "15px 2px 2px 2px",
-        padding: "10px",
-        width: "100%",
         color: theme.palette.text.contrastText,
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: "#1e1633",
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -27,14 +27,16 @@ export const LogoCard = () => {
 
     return (
         <div className={`${classes.paper} ${css.logoCard}`}>
-            {!isMobile && <AvatarImage avatarUrl={'images/move-maze-logo.png'} className={css.avatar} />}
-            <Typography variant="h6" className={css.logoCardText}>
-                грай-рушай
-            </Typography>
-            <div className={css.switchers}>
 
+                <Link to="/home">
+                    <LogoImage logoUrl={'images/move-maze-logo.png'} />
+                </Link>
 
-            </div>
+            {!isMobile && (
+                <Typography variant="h6" className={css.logoCardText}>
+                    грай-рушай
+                </Typography>
+            )}
         </div>
     );
 };

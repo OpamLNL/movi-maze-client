@@ -2,6 +2,25 @@
 import { useState } from 'react';
 import { TextField, IconButton, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles( (theme) => ({
+    root: {
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: theme.palette.text.contrastText,
+            },
+            '&:hover fieldset': {
+                borderColor: 'blue',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: '#f7005e',
+            },
+        },
+    },
+}));
+
+
 
 export const SearchBar = ({ onSearch }) => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -10,8 +29,9 @@ export const SearchBar = ({ onSearch }) => {
         onSearch(searchQuery); // Функція onSearch повинна обробляти логіку пошуку
     };
 
+    const classes = useStyles();
     return (
-        <TextField
+        <TextField className={classes.root}
             label="Пошук"
             variant="outlined"
             value={searchQuery}
@@ -26,7 +46,7 @@ export const SearchBar = ({ onSearch }) => {
                     </InputAdornment>
                 ),
             }}
-            fullWidth // Розтягує компонент на всю ширину батьківського елемента
+            fullWidth
         />
     );
 };

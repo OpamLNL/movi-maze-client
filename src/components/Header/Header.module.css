@@ -1,6 +1,6 @@
 .header {
     height: 12vw;
-    width: 100%;
+    width: 99%;
     margin-top: 15px;
     display: flex;
     flex-direction: row;
@@ -27,20 +27,15 @@
 
 
 .headerLogo {
-    height: 120%;
-    margin-left: 2vw;
+    width: 10%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    max-height: 12vw;
-    width: 12vw;
 }
 
 .headerProfile {
-    margin-right: 2vw;
+    width: 20%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    max-height: 12vw;
-    width: 12vw;
 }

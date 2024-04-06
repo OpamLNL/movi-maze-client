@@ -1,4 +1,4 @@
-import css from './Avatar.module.css';
+import css from './AvatarImage.module.css';
 
 
 const AvatarImage = ({avatarUrl}) => {

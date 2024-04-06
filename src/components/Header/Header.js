@@ -1,12 +1,12 @@
+import {useContext} from 'react';
+import css from './Header.module.css';
+
 import {Typography} from '@mui/material';
 
-import css from './Header.module.css';
+import {ThemeContext} from '../../themes/theme-context';
 
 import {ContrastContainer, LogoCard, MainMenu, UserInfo} from '../../components';
 
-
-import React, {useContext} from 'react';
-import {ThemeContext} from '../../themes/theme-context';
 
 
 const Header = () =>{

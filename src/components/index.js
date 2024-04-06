@@ -12,6 +12,7 @@ export {Header} from './Header/Header';
 export {Icon} from './Icon/Icon';
 export {LanguageSwitcher} from './LanguageSwitcher/LanguageSwitcher';
 export {LogoCard} from './LogoCard/LogoCard';
+export {LogoImage} from './LogoImage/LogoImage';
 export {MainMenu} from './MainMenu/MainMenu';
 export {MenuItem} from './MenuItem/MenuItem';
 

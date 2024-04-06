@@ -1,9 +1,6 @@
 .logoCard {
-    width: 70%;
-    height: 105%;
-    position: relative;
-    top: 5%;
-
+    width: 100%;
+height: 12vw;
     border-color: #f7005e;
     border-style: solid;
     border-width: thin;
@@ -15,19 +12,8 @@
 }
 
 .logoCardText{
-    margin-bottom: 15px;
-
     display: flex;
     justify-content: center;
     text-align: center;
 }
 
-
-
-.switchers{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding-left: 15%;
-}

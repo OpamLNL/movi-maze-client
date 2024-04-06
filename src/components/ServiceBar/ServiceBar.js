@@ -1,5 +1,5 @@
 import {SectionContainer} from "../Containers";
-import css from "../../App.module.css";
+import css from "./ServiceBar.module.css";
 import {LanguageSwitcher} from "../LanguageSwitcher/LanguageSwitcher";
 import {ThemeSwitcher} from "../ThemeSwitcher/ThemeSwitcher";
 import {SearchBar} from "../SearchBar/SearchBar";
@@ -7,16 +7,17 @@ import {SearchBar} from "../SearchBar/SearchBar";
 export const ServiceBar = () => {
 
     return (
-        <SectionContainer>
-            <div className={css.settingItem}>
-                <LanguageSwitcher />
+        <SectionContainer className={css.container}>
+
+            <div className={css.switcherContainer}>
+                <div className={css.settingItem}>
+                    <LanguageSwitcher />
+                </div>
+                <div className={css.settingItem}>
+                    <ThemeSwitcher />
+                </div>
             </div>
-            <div className={css.settingItem}>
-                <ThemeSwitcher />
-            </div>
-            <div>
                 <SearchBar />
-            </div>
         </SectionContainer>
     );
 };
