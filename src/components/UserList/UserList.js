@@ -4,6 +4,8 @@ import { fetchUsers } from '../../store/reducers/users/usersActions';
 import { selectUsers, selectUsersLoading, selectUsersError } from '../../store/reducers/users/usersSelectors';
 import css from './UserList.module.css';
 import {UserListItem} from "../ListItems";
+import {Avatar} from "@mui/material";
+import {SectionContainer} from "../Containers";
 
 
 const UserList = () => {
@@ -24,17 +26,23 @@ const UserList = () => {
         return <p>Error: {error}</p>;
     }
 
-
     const sortedUsers = [...users].sort((a, b) => a.role.localeCompare(b.role));
 
     return (
-        <div>
-                {sortedUsers && sortedUsers.map((user) => (
+        <SectionContainer title= "Зараз на сайті">
+            {sortedUsers && sortedUsers.map((user) => (
                     <UserListItem key={user.id}>
-                        {user.role}   {user.username}
+                        <Avatar
+
+                            src={"/static/images/avatar/" + user.avatar}
+                            sx={{width: 24, height: 24}}
+                        />
+                        {user.role} {user.username}
                     </UserListItem>
+
+
                 ))}
-        </div>
+        </SectionContainer>
     );
 };
 

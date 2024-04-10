@@ -1,37 +1,49 @@
-
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, IconButton, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles( (theme) => ({
-    root: {
-        '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-                borderColor: theme.palette.text.contrastText,
-            },
-            '&:hover fieldset': {
-                borderColor: 'blue',
-            },
-            '&.Mui-focused fieldset': {
-                borderColor: '#f7005e',
-            },
-        },
-    },
-}));
-
-
+import MicIcon from '@mui/icons-material/Mic';
+import MicOffIcon from '@mui/icons-material/MicOff';
+import WebkitSpeechRecognizer from '../../services/WebkitSpeechRecognizer';
 
 export const SearchBar = ({ onSearch }) => {
     const [searchQuery, setSearchQuery] = useState('');
+    const [isListening, setIsListening] = useState(false);
+    const [recognizer, setRecognizer] = useState(null);
+
+    useEffect(() => {
+        const speechRecognizer = new WebkitSpeechRecognizer();
+        speechRecognizer.onResult((result) => {
+            setSearchQuery(result);
+        });
+        speechRecognizer.onError((error) => {
+            console.error('Speech recognition error:', error);
+            setIsListening(false);
+        });
+        speechRecognizer.onEnd(() => {
+            setIsListening(false);
+        });
+        setRecognizer(speechRecognizer);
+    }, []);
 
     const handleSearch = () => {
-        onSearch(searchQuery); // Функція onSearch повинна обробляти логіку пошуку
+        onSearch(searchQuery);
+        if (isListening) {
+            recognizer.stop();
+            setIsListening(false);
+        }
     };
 
-    const classes = useStyles();
+    const handleMicClick = () => {
+        if (isListening) {
+            recognizer.stop();
+        } else {
+            recognizer.start();
+        }
+        setIsListening(!isListening);
+    };
+
     return (
-        <TextField className={classes.root}
+        <TextField
             label="Пошук"
             variant="outlined"
             value={searchQuery}
@@ -43,6 +55,9 @@ export const SearchBar = ({ onSearch }) => {
                         <IconButton onClick={handleSearch}>
                             <SearchIcon />
                         </IconButton>
+                        <IconButton onClick={handleMicClick}>
+                            {isListening ? <MicIcon /> : <MicOffIcon />}
+                        </IconButton>
                     </InputAdornment>
                 ),
             }}
@@ -50,5 +65,4 @@ export const SearchBar = ({ onSearch }) => {
         />
     );
 };
-
 

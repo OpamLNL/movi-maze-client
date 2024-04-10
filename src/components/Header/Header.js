@@ -5,12 +5,15 @@ import {Typography} from '@mui/material';
 
 import {ThemeContext} from '../../themes/theme-context';
 
-import {ContrastContainer, LogoCard, MainMenu, UserInfo} from '../../components';
+import {ContrastContainer, LogoCard, MainMenu, UserProfile} from '../../components';
+import {useSelector} from "react-redux";
+import {selectUsers} from "../../store/reducers/users/usersSelectors";
 
 
 
 const Header = () =>{
     const {theme} = useContext(ThemeContext);
+
 
 return(
         <ContrastContainer className={css.header}>
@@ -31,9 +34,7 @@ return(
 
             </div>
 
-            <div className={css.headerProfile}>
-                <UserInfo avatarUrl ={'images/move-maze-logo.png'} name ={'MOVE MAZE'} email ={'move_maze@mmh.com'}/>
-            </div>
+
         </ContrastContainer>
 );
 }

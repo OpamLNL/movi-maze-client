@@ -1,38 +1,28 @@
-//import {useDispatch} from "react-redux";
-import React, {useState} from "react";
-//import {LanguageProvider, useTranslate} from "../language/language-context";
-import css from "./SignUpPage.module.css";
-import TextField from "@mui/material/TextField";
-import {ContrastContainer} from "../components";
+import { useState } from 'react';
+import { TextField, Button } from '@mui/material';
+import { ContrastContainer } from '../components';
+import css from './SignUpPage.module.css';
 
-
-
-const SignUpPage = () => {
-    //const dispatch = useDispatch();
-    //const language = React.useContext(LanguageProvider, useTranslate);
-
+export const SignUpPage = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: '',
     });
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+    const handleChange = (event) => {
+        setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Ваша логіка для обробки реєстрації тут
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // Тут код для обробки даних реєстрації, наприклад, відправка на сервер
+        console.log(formData);
     };
-
-
-
 
     return (
         <div className={css.signUpFieldsBlock}>
-            <ContrastContainer title="Реєстрація" text="kkk">
-                <h2>Реєстрація</h2>
+            <ContrastContainer title="Реєстрація">
                 <form onSubmit={handleSubmit}>
                     <TextField
                         label="Ім'я"
@@ -43,15 +33,33 @@ const SignUpPage = () => {
                         value={formData.name}
                         onChange={handleChange}
                     />
-                    {/* Аналогічно додайте TextField для електронної пошти та пароля */}
-                    <button type="submit">Зареєструватися</button>
+                    <TextField
+                        label="Електронна пошта"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        type="email"
+                    />
+                    <TextField
+                        label="Пароль"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        type="password"
+                    />
+                    <Button type="submit" variant="contained" color="primary" fullWidth>
+                        Зареєструватися
+                    </Button>
                 </form>
                 <p>Вже маєте обліковий запис? <a href="/login">Увійдіть</a></p>
             </ContrastContainer>
         </div>
     );
 };
-
-export { SignUpPage };
-
 

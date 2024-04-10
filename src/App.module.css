@@ -1,30 +1,39 @@
-.mainContent{
+.main{
     display: flex;
     width: 98%;
     margin-top: 1%;
+    flex-direction: row;
     justify-content:  center;
+    align-items: start;
+}
+
+.mainContent{
+    display: flex;
+    margin-top: 1%;
+    flex-direction: column;
+    justify-content:  center;
+    flex-grow: 1;
 }
 
 .mainContainer {
     display: flex;
     flex-direction: row;
-    width: 98%;
-
-    justify-content: center;
+    justify-content: start;
     align-items: start;
+    flex-grow: 1;
+    min-height: 0;
 }
 
 .mainContainerCenter{
     display: flex;
     margin-top: 15px;
-    width: 65%;
     justify-content: center;
+    align-items: start;
 }
 
 .mainContainerSides{
     display: flex;
-    width: 15%;
+    width: 250px;
     justify-content: center;
 }
-
 

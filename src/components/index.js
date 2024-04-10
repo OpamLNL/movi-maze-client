@@ -15,11 +15,13 @@ export {LogoCard} from './LogoCard/LogoCard';
 export {LogoImage} from './LogoImage/LogoImage';
 export {MainMenu} from './MainMenu/MainMenu';
 export {MenuItem} from './MenuItem/MenuItem';
-
+export {MicrophoneSwitcher} from './MicrophoneSwitcher/MicrophoneSwitcher';
 
 export {MovieDetails} from './MovieDetails/MovieDetails';
 export {MoviesListCard} from './MoviesListCard/MoviesListCard';
 export {MoviesPagination} from './MoviesPagination/MoviesPagination';
+export {NewsCard} from './NewsCard/NewsCard';
+
 export {RightSidebar} from './RightSidebar/RightSidebar';
 export {LeftSidebar} from './LeftSidebar/LeftSidebar';
 
@@ -30,5 +32,8 @@ export {StarsRating} from './StarsRating/StarsRating';
 export {ThemeSwitcher} from './ThemeSwitcher/ThemeSwitcher';
 export {UserInfo} from './UserInfo/UserInfo';
 export {UserList} from './UserList/UserList';
+export {UserProfile} from './UserProfile/UserProfile';
+
+
 export {UserRoleName} from './UserRoleName/UserRoleName';
 

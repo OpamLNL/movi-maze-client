@@ -3,6 +3,7 @@ import { Container, Typography, Button } from '@mui/material';
 import { makeStyles } from "@material-ui/core/styles";
 import { LanguageContext } from "../language/language-context";
 import HomePageLocales from './homePageLocales';
+import {NewsList} from "../components/NewsList/NewsList";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -53,6 +54,7 @@ const LandingPage = () => {
             <Button variant="contained" color="primary" className={classes.button}>
                 {`${HomePageLocales.find(item => item.hasOwnProperty('startButton'))?.startButton[language.language] || ''}`}
             </Button>
+            <NewsList />
         </Container>
     );
 };

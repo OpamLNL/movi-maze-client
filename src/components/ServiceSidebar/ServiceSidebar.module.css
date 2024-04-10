@@ -1,0 +1,14 @@
+
+.mainSide{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile {
+    width: 98%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}

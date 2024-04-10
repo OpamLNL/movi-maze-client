@@ -4,7 +4,7 @@ const useStyles = makeStyles((theme) => ({
     listItem: {
         padding: "2px",
         width: "98%",
-        margin: "10px",
+        margin: "4px",
         cursor: "pointer",
         backgroundColor: theme.palette.primary.contrast,
         borderColor: theme.palette.primary.contrast,

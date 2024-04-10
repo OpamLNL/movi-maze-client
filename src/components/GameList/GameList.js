@@ -26,13 +26,11 @@ const GameList = () => {
 
     return (
         <div>
-            <ul>
                 {sortedGames && sortedGames.map((game) => (
                     <GameListItem key={game.id}>
                         {game.title} - {game.developer}
                     </GameListItem>
                 ))}
-            </ul>
         </div>
     );
 };

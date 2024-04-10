@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import {Navigate, Route, Routes} from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 
@@ -9,16 +9,15 @@ import { CssBaseline } from '@material-ui/core';
 
 import css from './App.module.css';
 
-import { MainLayout } from './layouts';
-import {Header, RightSidebar, LeftSidebar, ServiceBar, SectionContainer} from './components';
-import { ThemeContext } from './themes/theme-context';
-import { lightTheme, darkTheme } from './themes/theme';
+import {MainLayout, GameLayout, NewsLayout, SignInLayout, SignUpLayout} from './layouts';
+import {Header, LeftSidebar, ServiceBar, SectionContainer} from './components';
+import {ThemeContext} from './themes/theme-context';
+import {lightTheme, darkTheme} from './themes/theme';
 
-import { LanguageProvider } from './language/language-context';
-import {GameLayout} from "./layouts/GameLayout";
-import {SignUpLayout} from "./layouts/SignUpLayout";
+import {LanguageProvider} from './language/language-context';
+import {ServiceSidebar} from "./components/ServiceSidebar/ServiceSidebar";
 
-const App = () => {
+export const App = () => {
 
         const [theme, setTheme] = useState(darkTheme);
 
@@ -34,39 +33,37 @@ const App = () => {
                 <ThemeContext.Provider value={{ theme, setTheme: toggleTheme }}>
                 <ThemeProvider theme={theme}>
                     <CssBaseline />
-                    <Header />
-                    <ServiceBar />
 
-                    <div className={css.mainContent}>
-                                <div className={css.mainContainer}>
-                                    <div className={css.mainContainerSides}>
-                                        <LeftSidebar />
-                                    </div>
-                                    <div className={css.mainContainerCenter}>
-                                        <SectionContainer>
-                                            <Routes>
-                                                <Route index element={ <Navigate to={'home'} /> } />
-                                                <Route path={'home'} element={<MainLayout/>}/>
-                                                <Route index element={ <Navigate to={'games'} /> } />
-                                                <Route path={'games'} element={<GameLayout/>}/>
+                    <div className={css.main}>
+                            <div className={css.mainContent}>
+                                <Header />
+                                <ServiceBar />
 
+                                            <div className={css.mainContainer}>
+                                                <div className={css.mainContainerSides}>
+                                                    <LeftSidebar />
+                                                </div>
+                                                <div className={css.mainContainerCenter}>
+                                                    <SectionContainer>
+                                                        <Routes>
+                                                                <Route index element={<Navigate to={'home'} />} />
+                                                                <Route path={'home'} element={<MainLayout />} />
+                                                                <Route path={'games'} element={<GameLayout />} />
+                                                                <Route path={'news'} element={<NewsLayout />} />
+                                                                <Route path={'sign-up'} element={<SignUpLayout />} />
+                                                                <Route path={'sign-in'} element={<SignInLayout />} />
+                                                        </Routes>
+                                                    </SectionContainer>
+                                                </div>
 
-                                                <Route index element={ <Navigate to={'sign-up'} /> } />
-                                                <Route path={'sign-up'} element={<SignUpLayout/>}/>
-                                            </Routes>
-                                        </SectionContainer>
-                                    </div>
-                                    <div className={css.mainContainerSides}>
-                                        <RightSidebar />
-                                    </div>
-                                </div>
+                                            </div>
+                            </div>
+
+                        <ServiceSidebar />
                     </div>
-
                 </ThemeProvider>
                 </ThemeContext.Provider>
             </LanguageProvider>
         </Provider>
     );
 }
-
-export {App};

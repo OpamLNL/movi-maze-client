@@ -3,6 +3,7 @@ import css from "./ServiceBar.module.css";
 import {LanguageSwitcher} from "../LanguageSwitcher/LanguageSwitcher";
 import {ThemeSwitcher} from "../ThemeSwitcher/ThemeSwitcher";
 import {SearchBar} from "../SearchBar/SearchBar";
+import {MicrophoneSwitcher} from "../MicrophoneSwitcher/MicrophoneSwitcher";
 
 export const ServiceBar = () => {
 
@@ -18,6 +19,7 @@ export const ServiceBar = () => {
                 </div>
             </div>
                 <SearchBar />
+
         </SectionContainer>
     );
 };
