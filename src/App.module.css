@@ -31,9 +31,5 @@
     align-items: start;
 }
 
-.mainContainerSides{
-    display: flex;
-    width: 250px;
-    justify-content: center;
-}
+
 

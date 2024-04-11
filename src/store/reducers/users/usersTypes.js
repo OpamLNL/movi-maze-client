@@ -6,3 +6,7 @@ export const FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE';
 // Для вибору або скасування вибору юзера
 export const SELECT_USER = 'SELECT_USER';
 export const DESELECT_USER = 'DESELECT_USER';
+
+//для створення нового юзера
+export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';
+export const CREATE_USER_FAILURE = 'CREATE_USER_FAILURE';

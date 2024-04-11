@@ -13,10 +13,7 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         color: theme.palette.text.contrastText,
         backgroundColor: "#1e1633",
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: "center",
+        
     },
 }));
 

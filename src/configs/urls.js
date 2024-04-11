@@ -17,6 +17,7 @@ const urls = {
     users: {
         all: '/api/users/getAll',
         active: '/api/users/active',
+        create: '/api/users-create/post',
     },
     games: {
         all: '/api/games/getAll',

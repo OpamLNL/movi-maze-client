@@ -5,15 +5,16 @@ import MicIcon from '@mui/icons-material/Mic';
 import MicOffIcon from '@mui/icons-material/MicOff';
 import WebkitSpeechRecognizer from '../../services/WebkitSpeechRecognizer';
 
+const speechRecognizer = new WebkitSpeechRecognizer();
+
 export const SearchBar = ({ onSearch }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [isListening, setIsListening] = useState(false);
-    const [recognizer, setRecognizer] = useState(null);
 
     useEffect(() => {
-        const speechRecognizer = new WebkitSpeechRecognizer();
         speechRecognizer.onResult((result) => {
             setSearchQuery(result);
+            speechRecognizer.stop();
         });
         speechRecognizer.onError((error) => {
             console.error('Speech recognition error:', error);
@@ -21,23 +22,25 @@ export const SearchBar = ({ onSearch }) => {
         });
         speechRecognizer.onEnd(() => {
             setIsListening(false);
+            speechRecognizer.stop();
         });
-        setRecognizer(speechRecognizer);
+
+        return () => {
+            speechRecognizer.stop();
+        };
     }, []);
 
     const handleSearch = () => {
         onSearch(searchQuery);
-        if (isListening) {
-            recognizer.stop();
-            setIsListening(false);
-        }
+        speechRecognizer.stop();
+        setIsListening(false);
     };
 
     const handleMicClick = () => {
         if (isListening) {
-            recognizer.stop();
+            speechRecognizer.stop();
         } else {
-            recognizer.start();
+            speechRecognizer.start();
         }
         setIsListening(!isListening);
     };
@@ -65,4 +68,3 @@ export const SearchBar = ({ onSearch }) => {
         />
     );
 };
-

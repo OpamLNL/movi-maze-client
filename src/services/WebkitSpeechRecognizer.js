@@ -13,6 +13,12 @@ class WebkitSpeechRecognizer {
         this.recognition.lang = 'uk-UA';
         this.recognition.maxAlternatives = 1;
         this.isRecognizing = false;
+
+        this.recognition.onend = () => {
+            if (this.isRecognizing) {
+                this.recognition.start(); // Перезапускати розпізнавання після кожної паузи
+            }
+        };
     }
 
     start() {

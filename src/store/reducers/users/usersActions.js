@@ -1,6 +1,7 @@
 import axios from 'axios';
-import {apiBaseURL, urls, API_KEY} from "../../../configs/urls";
-import { FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE } from './usersTypes';
+import { apiBaseURL, urls } from "../../../configs/urls";
+import { FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE, CREATE_USER_SUCCESS, CREATE_USER_FAILURE } from './usersTypes';
+
 
 const fetchUsers = () => {
     return async (dispatch) => {
@@ -36,4 +37,36 @@ export const fetchUsersFailure = (error) => {
     };
 };
 
-export { fetchUsers };
+//створення нового юзера
+
+const createUser = (userData) => {
+    return async (dispatch) => {
+        dispatch(fetchUsersRequest());
+
+        try {
+            const response = await axios.post(`${apiBaseURL}${urls.users.create}`, userData);
+            dispatch(createUserSuccess(response.data));
+            // Можливо, зберегти токен або виконати додаткові дії
+        } catch (error) {
+            console.error('Error creating user:', error);
+            dispatch(createUserFailure(error.message));
+        }
+    };
+};
+
+export const createUserSuccess = (user) => {
+    return {
+        type: CREATE_USER_SUCCESS,
+        payload: user,
+    };
+};
+
+export const createUserFailure = (error) => {
+    return {
+        type: CREATE_USER_FAILURE,
+        payload: error,
+    };
+};
+
+
+export { fetchUsers, createUser };
