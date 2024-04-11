@@ -45,8 +45,13 @@ const createUser = (userData) => {
 
         try {
             const response = await axios.post(`${apiBaseURL}${urls.users.create}`, userData);
-            dispatch(createUserSuccess(response.data));
-            // Можливо, зберегти токен або виконати додаткові дії
+            const { user, token } = response.data;
+
+            localStorage.setItem('jwtToken', token);
+
+            localStorage.setItem('user', JSON.stringify(user));
+
+            dispatch(createUserSuccess(user));
         } catch (error) {
             console.error('Error creating user:', error);
             dispatch(createUserFailure(error.message));
