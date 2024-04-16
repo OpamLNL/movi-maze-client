@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { TextField, Button, Typography, Link } from '@mui/material';
 import { makeStyles } from '@material-ui/core/styles';
-import {ContrastContainer} from '../components';
+import { ContrastContainer } from '../components';
+import {axiosInstance} from '../api/axiosConfig';
+
+
 
 const useStyles = makeStyles({
     form: {
@@ -19,6 +22,7 @@ export const SignInPage = () => {
         email: '',
         password: '',
     });
+    const [error, setError] = useState('');
 
     const handleChange = (event) => {
         setFormData({
@@ -27,15 +31,23 @@ export const SignInPage = () => {
         });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        // Тут можна викликати API для авторизації
-        console.log('Дані для входу:', formData);
+        try {
+            const response = await axiosInstance.post('/api/auth/signin', formData);
+            const { token } = response.data;
+            localStorage.setItem('jwtToken', token);  // Зберігаємо токен у localStorage
+            console.log('Успішний вхід, токен збережено:', token);
+            // Переадресація користувача на головну сторінку або де інакше потрібно
+        } catch (error) {
+            setError('Не вдалося ввійти: ' + error.response?.data?.message || 'Невідома помилка');
+            console.error('Помилка при вході:', error.response || error.message);
+        }
     };
 
     return (
         <div className={classes.form}>
-            <ContrastContainer title="Вхід" text="">
+            <ContrastContainer title="Вхід">
                 <form onSubmit={handleSubmit}>
                     <TextField
                         label="Електронна пошта"
@@ -69,6 +81,7 @@ export const SignInPage = () => {
                     >
                         Увійти
                     </Button>
+                    {error && <Typography color="error">{error}</Typography>}
                 </form>
                 <Typography>
                     Ще не маєте облікового запису? <Link href="/signup" color="inherit">Зареєструйтеся</Link>
@@ -77,4 +90,3 @@ export const SignInPage = () => {
         </div>
     );
 };
-

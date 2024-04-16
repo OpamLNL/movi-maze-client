@@ -1,4 +1,3 @@
-const API_KEY = "c4afbfa3afc24cd4799e5c009de0e848";
 
 const baseURL = 'https://api.themoviedb.org'
 const apiBaseURL = 'http://localhost:5000';
@@ -11,7 +10,7 @@ const urls = {
     users: {
         all: '/api/users/getAll',
         active: '/api/users/active',
-        create: '/api/users-create/post',
+        create: '/api/users/create',
     },
     games: {
         all: '/api/games/getAll',
@@ -37,6 +36,5 @@ export {
     postersURL,
     avatarsURL,
     newsImagesURL,
-    urls,
-    API_KEY
+    urls
 };

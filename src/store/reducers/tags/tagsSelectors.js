@@ -1,1 +1,1 @@
-export const getGenres = state => state.genres.genres;
+export const getTags = state => state.tags.tags;
