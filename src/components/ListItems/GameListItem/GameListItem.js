@@ -6,8 +6,8 @@ const useStyles = makeStyles((theme) => ({
         width: "98%",
         margin: "4px",
         cursor: "pointer",
-        backgroundColor: theme.palette.primary.contrast,
-        borderColor: theme.palette.primary.contrast,
+        backgroundColor: theme.palette.primary.main,
+        borderColor: theme.palette.primary.dark,
         border: "1px solid",
         "&:hover": {
             backgroundColor: theme.palette.primary.light,

@@ -3,10 +3,30 @@ import { useDispatch } from 'react-redux';
 
 import { createUser } from '../store/reducers/users/usersActions';
 import { TextField, Button } from '@mui/material';
-import { ContrastContainer } from '../components';
+import { SectionContainer } from '../components';
 import css from './SignUpPage.module.css';
+import {makeStyles} from "@material-ui/core/styles";
+
+
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        margin: "15px 2px 2px 2px",
+        padding: "10px",
+        width: "98%",
+        color: theme.palette.primary.light,
+        backgroundColor: theme.palette.primary.dark,
+        justifyContent: "center",
+    },
+}));
+
+
+
 
 export const SignUpPage = () => {
+
+    const classes = useStyles();
+
+
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -33,8 +53,8 @@ export const SignUpPage = () => {
 
     return (
         <div className={css.signUpFieldsBlock}>
-            <ContrastContainer title="Реєстрація">
-                <form onSubmit={handleSubmit}>
+            <SectionContainer title="Реєстрація">
+                <form onSubmit={handleSubmit} className={classes.paper}>
                     <TextField
                         label="Ім'я користувача"
                         variant="outlined"
@@ -131,7 +151,7 @@ export const SignUpPage = () => {
                     </Button>
                 </form>
                 <p>Вже маєте обліковий запис? <a href="/login">Увійдіть</a></p>
-            </ContrastContainer>
+            </SectionContainer>
         </div>
     );
 };

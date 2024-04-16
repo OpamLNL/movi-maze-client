@@ -1,12 +1,12 @@
 import css from './ServiceSidebar.module.css';
-import {makeStyles} from "@material-ui/core/styles";
-import {RightSidebar} from "../RightSidebar/RightSidebar";
-import React, {useEffect} from "react";
-import { useDispatch, useSelector} from "react-redux";
-import {selectUsers} from "../../store/reducers/users/usersSelectors";
-import {UserProfile} from "../UserProfile/UserProfile";
-import {fetchUsers} from "../../store/reducers/users/usersActions";
-import {UserList} from "../UserList/UserList";
+
+import { makeStyles } from "@material-ui/core/styles";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUsers } from "../../store/reducers/users/usersSelectors";
+import { UserProfile } from "../UserProfile/UserProfile";
+import { fetchUsers } from "../../store/reducers/users/usersActions";
+import { UserList } from "../../components";
 
 
 
@@ -26,7 +26,7 @@ export const ServiceSidebar = () => {
     useEffect(() => {
         dispatch(fetchUsers());
     }, [dispatch]);
-    const user = users[0];
+    const user = users[users.length - 1];
 
     const classes = useStyles();
     return (

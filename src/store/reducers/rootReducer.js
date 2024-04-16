@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import {genresReducer} from './genres/genresReducer';
-import {movieReducer} from './movies/moviesReducer';
+import {tagsReducer} from './tags/tagsReducer';
 import {usersReducer} from "./users/usersReducer";
 import {gamesReducer} from "./games/gamesReducer";
 import {newsReducer} from "./news/newsReducer";
 import {likeByNewsReducer} from "./likeByNews/likeByNewsReducer";
+import {commentsReducer} from "./comments/commentsReducer";
 
 const rootReducer = combineReducers({
 
@@ -13,10 +13,10 @@ const rootReducer = combineReducers({
     news:  newsReducer,
     likeByNews:  likeByNewsReducer,
 
-    genres: genresReducer,
+    tags: tagsReducer,
 
     users:  usersReducer,
-    movies: movieReducer
+    comments: commentsReducer
 
 
 

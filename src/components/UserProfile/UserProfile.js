@@ -5,10 +5,10 @@ import Typography from "@mui/material/Typography";
 import { makeStyles } from '@material-ui/core/styles';
 import {useSelector} from "react-redux";
 import {selectUsers} from "../../store/reducers/users/usersSelectors";
+import { apiBaseURL, avatarsURL } from "../../configs/urls";
 
 
-
-
+const IMG_API = apiBaseURL + avatarsURL;
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -32,7 +32,7 @@ export const UserProfile = ({ user }) => {
     return (
         <Card className={classes.card}>
             <CardContent>
-                <Avatar alt={user.username} src={user.avatar} className={classes.avatar} />
+                <Avatar alt={user.username} src={IMG_API + user['avatar']} className={classes.avatar} />
                 <Typography variant="h5">{user.username}</Typography>
                 <Typography color="textSecondary">{user.handle}</Typography>
                 <Typography color="textSecondary">{user.genderPronouns}</Typography>

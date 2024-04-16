@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNews } from '../../store/reducers/news/newsActions';
 import { selectNews, selectNewsLoading, selectNewsError } from '../../store/reducers/news/newsSelectors';
-import { NewsListItem } from "../ListItems";
+import { NewsCard } from "../../components";
 
 const NewsList = () => {
     const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const NewsList = () => {
     return (
         <div>
             {sortedNews && sortedNews.map((newsItem) => (
-                <NewsListItem key={newsItem.id} news={newsItem} />
+                <NewsCard key={newsItem.id} news={newsItem} />
             ))}
         </div>
     );

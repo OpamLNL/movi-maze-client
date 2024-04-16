@@ -7,6 +7,11 @@ import {UserListItem} from "../ListItems";
 import {Avatar} from "@mui/material";
 import {SectionContainer} from "../Containers";
 
+import { apiBaseURL, avatarsURL } from "../../configs/urls";
+
+
+const IMG_API = apiBaseURL + avatarsURL;
+
 
 const UserList = () => {
     const dispatch = useDispatch();
@@ -28,13 +33,16 @@ const UserList = () => {
 
     const sortedUsers = [...users].sort((a, b) => a.role.localeCompare(b.role));
 
+
+
+
     return (
         <SectionContainer title= "Зараз на сайті">
             {sortedUsers && sortedUsers.map((user) => (
                     <UserListItem key={user.id}>
                         <Avatar
 
-                            src={"/static/images/avatar/" + user.avatar}
+                            src={IMG_API + user['avatar']}
                             sx={{width: 24, height: 24}}
                         />
                         {user.role} {user.username}

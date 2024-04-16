@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
         margin: "15px 2px 2px 2px",
         padding: "10px",
         width: "98%",
-        color: theme.palette.text.contrastText,
+        color: theme.palette.primary.light,
         backgroundColor: theme.palette.primary.light,
         justifyContent: "center",
     },

@@ -52,9 +52,9 @@ const GameCard = ({ game }) => {
     const classes = useStyles();
 
     return (
-        <Link to={`/movie-details/${game.id}`} className={classes.linkButton}>
-            <div className={css.gameCard} >
 
+        <Link to={game.link} className={classes.linkButton}>
+            <div className={css.gameCard} >
 
                 {/*<div >*/}
                 {/*    <GenreBadge genres = {genreArray}/>*/}
@@ -74,6 +74,7 @@ const GameCard = ({ game }) => {
 
                 <div className={css.gameMainContent}>
                     <img className={css.zoom} src={IMG_API + game['poster_url']} alt = {game.title} />
+
                     {game.title}
                     />
                 </div>
