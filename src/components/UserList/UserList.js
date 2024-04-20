@@ -31,25 +31,30 @@ const UserList = () => {
         return <p>Error: {error}</p>;
     }
 
-    const sortedUsers = [...users].sort((a, b) => a.role.localeCompare(b.role));
-
-
-
+    let sortedUsers = [...users].sort((a, b) => {
+        if (a.role && b.role) {
+            return a.role.localeCompare(b.role);
+        }
+        if (!a.role) {
+            return 1;
+        }
+        if (!b.role) {
+            return -1;
+        }
+        return 0;
+    });
 
     return (
-        <SectionContainer title= "Зараз на сайті">
-            {sortedUsers && sortedUsers.map((user) => (
-                    <UserListItem key={user.id}>
-                        <Avatar
-
-                            src={IMG_API + user['avatar']}
-                            sx={{width: 24, height: 24}}
-                        />
-                        {user.role} {user.username}
-                    </UserListItem>
-
-
-                ))}
+        <SectionContainer title="Зараз на сайті">
+            {sortedUsers.map((user, index) => (
+                <UserListItem key={user.id}>
+                    <Avatar
+                        src={IMG_API + user.avatar}
+                        sx={{ width: 24, height: 24 }}
+                    />
+                    {user.role} {user.username}
+                </UserListItem>
+            ))}
         </SectionContainer>
     );
 };
