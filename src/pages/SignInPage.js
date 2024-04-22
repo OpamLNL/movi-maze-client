@@ -1,10 +1,10 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { TextField, Button, Typography, Link } from '@mui/material';
 import { makeStyles } from '@material-ui/core/styles';
 import { ContrastContainer } from '../components';
-import {axiosInstance} from '../api/axiosConfig';
-
-
+import { axiosInstance } from '../api/axiosConfig';
 
 const useStyles = makeStyles({
     form: {
@@ -18,6 +18,7 @@ const useStyles = makeStyles({
 
 export const SignInPage = () => {
     const classes = useStyles();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -35,13 +36,15 @@ export const SignInPage = () => {
         event.preventDefault();
         try {
             const response = await axiosInstance.post('/api/auth/signin', formData);
-            const { token } = response.data;
-            localStorage.setItem('jwtToken', token);  // Зберігаємо токен у localStorage
-            console.log('Успішний вхід, токен збережено:', token);
-            // Переадресація користувача на головну сторінку або де інакше потрібно
+            const { accessToken, refreshToken } = response.data;
+            localStorage.setItem('jwtAccessToken', accessToken);
+            localStorage.setItem('jwtRefreshToken', refreshToken);
+
+            navigate('/home');
         } catch (error) {
-            setError('Не вдалося ввійти: ' + error.response?.data?.message || 'Невідома помилка');
-            console.error('Помилка при вході:', error.response || error.message);
+            const errorMsg = error.response?.data?.message || 'Невідома помилка';
+            setError('Не вдалося ввійти: ' + errorMsg);
+            //console.error('Помилка при вході:', error.response || error.message);
         }
     };
 

@@ -5,11 +5,9 @@ import { FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE, CREATE_U
 
 const fetchUsers = () => {
     return async (dispatch) => {
-        console.log('Відправка запиту на отримання користувачів:', `${apiBaseURL}${urls.users.all}`);
         dispatch(fetchUsersRequest());
         try {
             const response = await axios.get(`${apiBaseURL}${urls.users.all}`);
-            console.log('Отримана відповідь при запиті користувачів:', response.data);
             dispatch(fetchUsersSuccess(response.data));
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -44,7 +42,6 @@ export const fetchUsersFailure = (error) => {
 const createUser = (userData) => {
     return async (dispatch) => {
         dispatch(fetchUsersRequest());
-        console.log(`${apiBaseURL}${urls.users.create}`);
         try {
             const response = await axios.post(`${apiBaseURL}${urls.users.create}`, userData);
             const { user, token } = response.data;
