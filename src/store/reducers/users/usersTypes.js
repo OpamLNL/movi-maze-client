@@ -10,3 +10,6 @@ export const DESELECT_USER = 'DESELECT_USER';
 //для створення нового юзера
 export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';
 export const CREATE_USER_FAILURE = 'CREATE_USER_FAILURE';
+
+
+export const AUTHENTICATE_USER = 'AUTHENTICATE_USER';

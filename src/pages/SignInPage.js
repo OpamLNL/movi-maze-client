@@ -36,9 +36,10 @@ export const SignInPage = () => {
         event.preventDefault();
         try {
             const response = await axiosInstance.post('/api/auth/signin', formData);
-            const { accessToken, refreshToken } = response.data;
+            const { user, accessToken, refreshToken } = response.data;
             localStorage.setItem('jwtAccessToken', accessToken);
             localStorage.setItem('jwtRefreshToken', refreshToken);
+            localStorage.setItem('user', JSON.stringify(user));
 
             navigate('/home');
         } catch (error) {

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { createUser } from '../store/reducers/users/usersActions';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Typography, Link } from '@mui/material';
 import { SectionContainer } from '../components';
 import css from './SignUpPage.module.css';
-import {makeStyles} from "@material-ui/core/styles";
-
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -19,14 +19,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
-
-
 export const SignUpPage = () => {
-
     const classes = useStyles();
-
-
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -39,16 +35,20 @@ export const SignUpPage = () => {
         timezone: '',
     });
 
-    const dispatch = useDispatch();
-
     const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         console.log(formData);
-        dispatch(createUser(formData));
+        dispatch(createUser(formData, (user, tokens) => {
+            if (tokens) {
+                localStorage.setItem('jwtAccessToken', tokens.accessToken);
+                localStorage.setItem('jwtRefreshToken', tokens.refreshToken);
+                navigate('/home');
+            }
+        }));
     };
 
     return (
@@ -150,7 +150,9 @@ export const SignUpPage = () => {
                         Зареєструватися
                     </Button>
                 </form>
-                <p>Вже маєте обліковий запис? <a href="/login">Увійдіть</a></p>
+                <Typography>
+                    Ще не маєте облікового запису? <Link href="/login" color="inherit">Увійдіть</Link>
+                </Typography>
             </SectionContainer>
         </div>
     );
