@@ -2,7 +2,7 @@
 export {ActiveUsersList} from './ActiveUsersList/ActiveUsersList';
 export {AvatarImage} from './AvatarImage/AvatarImage';
 export {Badge} from './Badge/Badge';
-export {Button} from './Button/Button';
+export * from './Buttons';
 export * from "./Containers";
 export {GameCard} from './GameCard/GameCard';
 

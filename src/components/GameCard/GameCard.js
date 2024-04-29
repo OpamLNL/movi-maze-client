@@ -20,7 +20,6 @@ import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 
 const IMG_API = apiBaseURL + postersURL;
-
 const GameCard = ({ game }) => {
 
     const rating = game.vote_average;
@@ -73,10 +72,10 @@ const GameCard = ({ game }) => {
                 </div>
 
                 <div className={css.gameMainContent}>
+                    {game['poster_url']}
                     <img className={css.zoom} src={IMG_API + game['poster_url']} alt = {game.title} />
 
                     {game.title}
-                    />
                 </div>
 
 

@@ -33,20 +33,6 @@
             "en-US" : "News",
             "uk-UA" : "Новини"
         }
-    },
-    {
-        "id": "6",
-        "label": {
-            "en-US" : "Sign in",
-            "uk-UA" : "Вхід"
-        }
-    },
-    {
-        "id": "7",
-        "label": {
-            "en-US" : "Sign up",
-            "uk-UA" : "Реєстрація"
-        }
     }
 ]
 

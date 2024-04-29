@@ -18,13 +18,5 @@
     {
         "id": "5",
         "link": "/news"
-    },
-    {
-        "id": "6",
-        "link": "/sign-in"
-    },
-    {
-        "id": "7",
-        "link": "/sign-up"
     }
 ]

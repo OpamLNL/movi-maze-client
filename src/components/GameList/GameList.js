@@ -23,10 +23,10 @@ const GameList = () => {
     }
 
     const sortedGames = [...games].sort((a, b) => a.title.localeCompare(b.title));
-
     return (
         <div>
                 {sortedGames && sortedGames.map((game) => (
+
                     <GameListItem key={game.id}>
                         {game.title} - {game.developer}
                     </GameListItem>

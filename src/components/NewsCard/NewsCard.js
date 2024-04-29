@@ -6,12 +6,13 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import StarBorderIcon from '@material-ui/icons/StarBorder'; // Іконка для лайків
-import VolumeUpIcon from '@material-ui/icons/VolumeUp'; // Іконка для озвучування
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import VolumeUpIcon from '@material-ui/icons/VolumeUp'; //
 
 import { apiBaseURL, newsImagesURL } from '../../configs/urls';
 import { ThemeContext } from '../../themes/theme-context';
-import css from './NewsCard.module.css'; // Переконайтесь, що стилі відповідні
+import css from './NewsCard.module.css';
+import {Handshake} from "@mui/icons-material";
 
 const IMG_API = apiBaseURL + newsImagesURL;
 
@@ -61,8 +62,8 @@ export const NewsCard = ({ news }) => {
         if ('speechSynthesis' in window) {
             const speechSynthesis = window.speechSynthesis;
             const utterance = new SpeechSynthesisUtterance(news.content);
-            utterance.voice = speechSynthesis.getVoices().find(voice => voice.lang === 'uk-UA'); // Змініть на потрібну мову
-            speechSynthesis.cancel(); // Зупиняє будь-яке наявне озвучування перед новим
+            utterance.voice = speechSynthesis.getVoices().find(voice => voice.lang === 'uk-UA');
+            speechSynthesis.cancel();
             speechSynthesis.speak(utterance);
             setIsSpeaking(true);
             utterance.onend = () => setIsSpeaking(false);
@@ -88,10 +89,9 @@ export const NewsCard = ({ news }) => {
                 <Typography variant="body2" color="textSecondary">
                     {news.content}
                 </Typography>
-                <Button startIcon={<VolumeUpIcon />} onClick={speakText} disabled={isSpeaking}>
-                    Озвучити
-                </Button>
-                <StarBorderIcon onClick={handleLike} /> {/* Іконка для лайків */}
+
+                <Button startIcon={<VolumeUpIcon />} onClick={speakText} disabled={isSpeaking} />
+                <Button startIcon= {<Handshake />} onClick={handleLike} />
             </CardContent>
         </Card>
     );

@@ -1,26 +1,70 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+
+import css from './UserProfile.module.css';
+
 import { logoutUser } from '../../store/reducers/users/usersActions';
 
 import { Card, CardContent, Avatar, Button, Typography } from '@mui/material';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { makeStyles } from '@material-ui/core/styles';
 import { apiBaseURL, avatarsURL } from '../../configs/urls';
+import {RoundButton} from "../Buttons";
+import {Container3d} from "../Containers";
+import {LoginRounded, SignpostRounded} from "@mui/icons-material";
+import {SignUpPage} from "../../pages/SignUpPage";
 
 const IMG_API = apiBaseURL + avatarsURL;
 
 const useStyles = makeStyles((theme) => ({
     card: {
-        maxWidth: 345,
+        backgroundColor: '#334756',
+        padding: theme.spacing(4),
+        borderRadius: theme.shape.borderRadius,
+        boxShadow: theme.shadows[5],
         textAlign: 'center',
-    },
-    avatar: {
-        width: theme.spacing(15),
-        height: theme.spacing(15),
+        maxWidth: '100%',
         margin: 'auto',
     },
+    title: {
+        color: theme.palette.primary.contrastText,
+        marginBottom: theme.spacing(2),
+    },
+    avatar: {
+        margin: 'auto',
+        width: theme.spacing(12),
+        height: theme.spacing(12),
+        marginBottom: theme.spacing(2),
+    },
+    inputField: {
+        '& .MuiInputBase-input': {
+            color: theme.palette.primary.dark,
+        },
+        '& .MuiInputLabel-root': {
+            color: theme.palette.primary.dark,
+        },
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: theme.palette.primary.dark,
+            },
+            '&:hover fieldset': {
+                borderColor: theme.palette.primary.dark,
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: theme.palette.primary.dark,
+            },
+        },
+        margin: theme.spacing(1, 0),
+    },
     button: {
-        margin: theme.spacing(2),
+        margin: theme.spacing(2, 0),
+        backgroundColor: theme.palette.primary.contrastText,
+        color: '#fff',
+        '&:hover': {
+            backgroundColor: '#5c7c8a',
+        },
     },
 }));
 
@@ -47,34 +91,36 @@ export const UserProfile = () => {
 
     if (!accessToken || !user) {
         return (
-            <Card className={classes.card}>
-                <CardContent>
+            <Container3d >
+                 <CardContent >
                     <Typography variant="h6">Please sign in</Typography>
-                    <Button variant="contained" color="primary" className={classes.button} onClick={() => navigate('/sign-in')}>
-                        Login
-                    </Button>
-                    <Button variant="outlined" className={classes.button} onClick={() => navigate('/sign-up')}>
-                        Sign Up
-                    </Button>
+                     <div className={css.userFunction}>
+                         <RoundButton className={classes.button} onClick={() => navigate('/sign-in')}> <LoginRounded /> </RoundButton>
+                         <RoundButton className={classes.button} onClick={() => navigate('/sign-up')}> <SignpostRounded /> </RoundButton>
+                     </div>
                 </CardContent>
-            </Card>
+            </Container3d>
         );
     }
 
     return (
-        <Card className={classes.card}>
+        <Container3d >
             <CardContent>
+                <Typography variant="h4" className={classes.title}>
+                    {user.username}
+                </Typography>
                 <Avatar alt={user.username} src={IMG_API + user.avatar} className={classes.avatar} />
-                <Typography variant="h5">{user.username}</Typography>
-                <Typography color="textSecondary">{user.email}</Typography>
-                <Button variant="outlined" className={classes.button} onClick={() => navigate('/edit-profile')}>
-                    Edit profile
-                </Button>
-                <Button variant="outlined" color="secondary" className={classes.button} onClick={handleLogout}>
-                    Logout
-                </Button>
+
+                <Typography> {user.email} </Typography>
+
+                <div className={css.userFunction}>
+                    <RoundButton className={classes.button} onClick={() => navigate('/edit-profile')}> <PersonOutlineIcon /> </RoundButton>
+                    <RoundButton className={classes.button}> <MailOutlineIcon /> </RoundButton>
+                    <RoundButton className={classes.button} onClick={handleLogout} > <ExitToAppIcon /> </RoundButton>
+                </div>
+
             </CardContent>
-        </Card>
+        </Container3d>
     );
 };
 
