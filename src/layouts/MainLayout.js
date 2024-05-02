@@ -1,11 +1,10 @@
-import LandingPage from "../pages/HomePage";
+import { HomePage } from "../pages/HomePage";
 
-const MainLayout = () => {
+export const MainLayout = () => {
     return (
         <div>
-            <LandingPage />
+            <HomePage />
         </div>
     );
 };
 
-export {MainLayout};

@@ -6,7 +6,7 @@ import { fetchGames } from '../store/reducers/games/gamesActions';
 // import { LanguageContext } from '../language/language-context';
 import { GameCard } from "../components";
 
-const GamesPage = () => {
+export const GamesPage = () => {
     const dispatch = useDispatch();
     const games = useSelector(selectGames);
     // const language = useContext(LanguageContext);
@@ -26,4 +26,3 @@ const GamesPage = () => {
     );
 };
 
-export { GamesPage };

@@ -9,13 +9,24 @@ import { CssBaseline } from '@material-ui/core';
 
 import css from './App.module.css';
 
-import {MainLayout, GameLayout, NewsLayout, SignInLayout, SignUpLayout} from './layouts';
-import {Header, LeftSidebar, ServiceBar, SectionContainer} from './components';
-import {ThemeContext} from './themes/theme-context';
-import {lightTheme, darkTheme} from './themes/theme';
+import {    AdminLayout,
+            MainLayout,
+            GameLayout,
+            NewsLayout,
+            SignInLayout,
+            SignUpLayout
+        } from './layouts';
+import {
+            Header,
+            LeftSidebar,
+            ServiceBar,
+            SectionContainer
+        } from './components';
+import { ThemeContext} from './themes/theme-context';
+import { lightTheme, darkTheme} from './themes/theme';
 
-import {LanguageProvider} from './language/language-context';
-import {ServiceSidebar} from "./components/ServiceSidebar/ServiceSidebar";
+import { LanguageProvider } from './language/language-context';
+import { ServiceSidebar } from "./components/ServiceSidebar/ServiceSidebar";
 
 export const App = () => {
 
@@ -52,6 +63,7 @@ export const App = () => {
                                                                 <Route path={'news'} element={<NewsLayout />} />
                                                                 <Route path={'sign-up'} element={<SignUpLayout />} />
                                                                 <Route path={'sign-in'} element={<SignInLayout />} />
+                                                                <Route path={'admin-page'} element={<AdminLayout />} />
                                                         </Routes>
                                                     </SectionContainer>
                                                 </div>

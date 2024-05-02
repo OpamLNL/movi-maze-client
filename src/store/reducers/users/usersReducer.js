@@ -4,7 +4,11 @@ import {
     FETCH_USERS_FAILURE,
     CREATE_USER_SUCCESS,
     CREATE_USER_FAILURE,
-    AUTHENTICATE_USER
+    UPDATE_USER_SUCCESS,
+    UPDATE_USER_FAILURE,
+    DELETE_USER_SUCCESS,
+    DELETE_USER_FAILURE,
+    AUTHENTICATE_USER,
 } from './usersTypes';
 
 const initialState = {
@@ -19,6 +23,8 @@ const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_USERS_REQUEST:
         case CREATE_USER_FAILURE:
+        case DELETE_USER_SUCCESS:
+        case UPDATE_USER_FAILURE:
             return {
                 ...state,
                 loading: true,
@@ -31,6 +37,8 @@ const usersReducer = (state = initialState, action) => {
                 error: ''
             };
         case FETCH_USERS_FAILURE:
+        case DELETE_USER_FAILURE:
+        case UPDATE_USER_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -38,6 +46,7 @@ const usersReducer = (state = initialState, action) => {
                 error: action.payload
             };
         case CREATE_USER_SUCCESS:
+        case UPDATE_USER_FAILURE:
             return {
                 ...state,
                 loading: false,

@@ -7,9 +7,17 @@ export const FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE';
 export const SELECT_USER = 'SELECT_USER';
 export const DESELECT_USER = 'DESELECT_USER';
 
-//для створення нового юзера
+// Для створення нового юзера
 export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';
 export const CREATE_USER_FAILURE = 'CREATE_USER_FAILURE';
 
+// Для видалення юзера
+export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
+export const DELETE_USER_FAILURE = 'DELETE_USER_FAILURE';
 
+// Для аутентифікації юзера
 export const AUTHENTICATE_USER = 'AUTHENTICATE_USER';
+
+// Для оновлення користувача
+export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
+export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';

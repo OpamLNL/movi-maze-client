@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { Container, Typography, Button } from '@mui/material';
 import { makeStyles } from "@material-ui/core/styles";
 import { LanguageContext } from "../language/language-context";
-import HomePageLocales from './homePageLocales';
-import {NewsList} from "../components/NewsList/NewsList";
+import homePageLocales from './Locales/homePageLocales.json';
+import { NewsList } from "../components/NewsList/NewsList";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const LandingPage = () => {
+export const HomePage = () => {
     const classes = useStyles();
     const language = useContext(LanguageContext);
 
@@ -41,22 +41,21 @@ const LandingPage = () => {
         <Container className={classes.container}>
             <Typography variant="h1" className={classes.title}>
 
-                {`${HomePageLocales.find(item => item.hasOwnProperty('welcome'))?.welcome[language.language] || ''}`}
+                {`${homePageLocales.find(item => item.hasOwnProperty('welcome'))?.welcome[language.language] || ''}`}
 
             </Typography>
 
             <Typography variant="body1" className={classes.description}>
 
-                {`${HomePageLocales.find(item => item.hasOwnProperty('subtitle'))?.subtitle[language.language] || ''}`}
+                {`${homePageLocales.find(item => item.hasOwnProperty('subtitle'))?.subtitle[language.language] || ''}`}
 
             </Typography>
 
             <Button variant="contained" color="primary" className={classes.button}>
-                {`${HomePageLocales.find(item => item.hasOwnProperty('startButton'))?.startButton[language.language] || ''}`}
+                {`${homePageLocales.find(item => item.hasOwnProperty('startButton'))?.startButton[language.language] || ''}`}
             </Button>
             <NewsList />
         </Container>
     );
 };
 
-export default LandingPage;

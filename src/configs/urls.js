@@ -11,6 +11,7 @@ const urls = {
         all: '/api/users/getAll',
         active: '/api/users/active',
         create: '/api/users/create',
+        delete: '/api/users/delete',
     },
     games: {
         all: '/api/games/getAll',

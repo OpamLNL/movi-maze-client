@@ -5,16 +5,22 @@ import css from './UserProfile.module.css';
 
 import { logoutUser } from '../../store/reducers/users/usersActions';
 
-import { Card, CardContent, Avatar, Button, Typography } from '@mui/material';
+import {
+    CardContent,
+    Avatar,
+    Typography } from '@mui/material';
+
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import SettingsIcon from '@mui/icons-material/Settings';
+
+
 import { makeStyles } from '@material-ui/core/styles';
 import { apiBaseURL, avatarsURL } from '../../configs/urls';
-import {RoundButton} from "../Buttons";
-import {Container3d} from "../Containers";
+import { RoundButton } from "../Buttons";
+import { Container3d } from "../Containers";
 import {LoginRounded, SignpostRounded} from "@mui/icons-material";
-import {SignUpPage} from "../../pages/SignUpPage";
 
 const IMG_API = apiBaseURL + avatarsURL;
 
@@ -117,6 +123,11 @@ export const UserProfile = () => {
                     <RoundButton className={classes.button} onClick={() => navigate('/edit-profile')}> <PersonOutlineIcon /> </RoundButton>
                     <RoundButton className={classes.button}> <MailOutlineIcon /> </RoundButton>
                     <RoundButton className={classes.button} onClick={handleLogout} > <ExitToAppIcon /> </RoundButton>
+                    {user.role === 'admin' && (
+                        <RoundButton className={classes.button} onClick={() => navigate('/admin-page')}>
+                            <SettingsIcon />
+                        </RoundButton>
+                    )}
                 </div>
 
             </CardContent>

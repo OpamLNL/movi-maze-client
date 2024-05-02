@@ -1,6 +1,6 @@
-import {GamesPage} from "../pages/GamesPage";
+import { GamesPage } from "../pages/GamesPage";
 
-const GameLayout = () => {
+export const GameLayout = () => {
     return (
         <div>
             <GamesPage />
@@ -8,4 +8,3 @@ const GameLayout = () => {
     );
 };
 
-export {GameLayout};

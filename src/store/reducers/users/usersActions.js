@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { apiBaseURL, urls } from "../../../configs/urls";
-import { FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE, CREATE_USER_SUCCESS, CREATE_USER_FAILURE, AUTHENTICATE_USER } from './usersTypes';
-
+import { FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE, CREATE_USER_SUCCESS, CREATE_USER_FAILURE, UPDATE_USER_SUCCESS, UPDATE_USER_FAILURE, DELETE_USER_SUCCESS, DELETE_USER_FAILURE, AUTHENTICATE_USER } from './usersTypes';
 
 const fetchUsers = () => {
     return async (dispatch) => {
@@ -15,7 +14,6 @@ const fetchUsers = () => {
         }
     };
 };
-
 
 export const fetchUsersRequest = () => {
     return {
@@ -76,6 +74,62 @@ export const createUserFailure = (error) => {
     };
 };
 
+const updateUser = (userId, userData) => {
+    return async (dispatch) => {
+        dispatch(fetchUsersRequest());
+        try {
+            const response = await axios.put(`${apiBaseURL}${urls.users.update}/${userId}`, userData);
+
+            const updatedUser = response.data;
+
+            dispatch(updateUserSuccess(updatedUser));
+        } catch (error) {
+            console.error('Error updating user:', error);
+            dispatch(updateUserFailure(error.response?.data?.message || error.message));
+        }
+    };
+};
+
+export const updateUserSuccess = (user) => {
+    return {
+        type: UPDATE_USER_SUCCESS,
+        payload: user,
+    };
+};
+
+export const updateUserFailure = (error) => {
+    return {
+        type: UPDATE_USER_FAILURE,
+        payload: error,
+    };
+};
+
+const deleteUser = (userId) => {
+    console.log(`${apiBaseURL}${urls.users.delete}/:${userId}`);
+    return async (dispatch) => {
+        try {
+            await axios.delete(`${apiBaseURL}${urls.users.delete}/:${userId}`);
+            dispatch(deleteUserSuccess(userId));
+        } catch (error) {
+            console.error('Error deleting user:', error);
+            dispatch(deleteUserFailure(error.message));
+        }
+    };
+};
+
+export const deleteUserSuccess = (userId) => {
+    return {
+        type: DELETE_USER_SUCCESS,
+        payload: userId,
+    };
+};
+
+export const deleteUserFailure = (error) => {
+    return {
+        type: DELETE_USER_FAILURE,
+        payload: error,
+    };
+};
 
 const logoutUser = () => {
     return {
@@ -83,4 +137,4 @@ const logoutUser = () => {
     };
 };
 
-export { fetchUsers, createUser, logoutUser };
+export { fetchUsers, createUser, updateUser, deleteUser, logoutUser };
