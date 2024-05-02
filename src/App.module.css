@@ -16,6 +16,7 @@
 }
 
 .mainContainer {
+    width: 99%;
     display: flex;
     flex-direction: row;
     justify-content: start;
@@ -25,6 +26,7 @@
 }
 
 .mainContainerCenter{
+    width: 99%;
     display: flex;
     margin-top: 15px;
     justify-content: center;

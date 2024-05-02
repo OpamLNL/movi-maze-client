@@ -16,4 +16,3 @@ export const searchNews = (state, searchTerm) =>
 
 export const selectUserLikeStatus = (state, newsId, userId) =>
     state.news.likes.some(like => like.newsId === newsId && like.userId === userId);
-

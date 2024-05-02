@@ -20,7 +20,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { apiBaseURL, avatarsURL } from '../../configs/urls';
 import { RoundButton } from "../Buttons";
 import { Container3d } from "../Containers";
-import {LoginRounded, SignpostRounded} from "@mui/icons-material";
+import { LoginRounded, SignpostRounded } from "@mui/icons-material";
 
 const IMG_API = apiBaseURL + avatarsURL;
 
@@ -112,12 +112,13 @@ export const UserProfile = () => {
     return (
         <Container3d >
             <CardContent>
-                <Typography variant="h4" className={classes.title}>
-                    {user.username}
-                </Typography>
-                <Avatar alt={user.username} src={IMG_API + user.avatar} className={classes.avatar} />
-
-                <Typography> {user.email} </Typography>
+                <div className={css.userFunction}>
+                    <Avatar alt={user.username} src={IMG_API + user.avatar} className={classes.avatar} />
+                    <Typography variant="h4" className={classes.title}>
+                        {user.username}
+                    </Typography>
+                </div>
+                    <Typography> {user.email} </Typography>
 
                 <div className={css.userFunction}>
                     <RoundButton className={classes.button} onClick={() => navigate('/edit-profile')}> <PersonOutlineIcon /> </RoundButton>

@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     button: {
+        height: "100%",
+        margin: "3px",
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -18,13 +20,13 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export const RoundButton = ({ onClick, children, className }) => {
+export const RoundButton = React.forwardRef(({ onClick, children, className, ...rest }, ref) => {
     const classes = useStyles();
 
     return (
-        <button onClick={onClick} className={`${classes.button} ${className}`}>
+        <button ref={ref} onClick={onClick} className={`${classes.button} ${className}`} {...rest}>
             {children}
         </button>
     );
-};
+});
 
