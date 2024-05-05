@@ -2,34 +2,50 @@
 const baseURL = 'https://api.themoviedb.org'
 const apiBaseURL = 'http://localhost:5000';
 const postersURL = '/images/posters/';
+const gamesURL = '/games-repository/';
 const avatarsURL = '/images/avatars/';
 const newsImagesURL = '/images/newsImages/';
 
 const urls = {
-
     users: {
-        all: '/api/users/getAll',
-        active: '/api/users/active',
+        getAll: '/api/users/getAll',
+        getById: '/api/users/getUserById',
         create: '/api/users/create',
-        delete: '/api/users/delete',
+        update: '/api/users/update',
+        delete: '/api/users/delete/:id',
     },
     games: {
-        all: '/api/games/getAll',
-        popular: '/api/games/popular',
+        getAll: '/api/games/getAll',
+        getById: '/api/games/getGameById/:id',
+        create: '/api/games/create',
+        update: '/api/games/update/:id',
+        delete: '/api/games/delete/:id',
     },
     news: {
         getAll: '/api/news/getAll',
+        getById: '/api/news/getNewsById/:id',
         create: '/api/news/create',
-        update: '/api/news/update',
-        delete: '/api/news/delete',
+        update: '/api/news/update/:id',
+        delete: '/api/news/delete/:id',
     },
     newsLikes: {
-        getLikesByNewsId: '/api/newsLikes/getLikesByNewsId',
+        getLikesByNewsId: '/api/newsLikes/getLikesByNewsId/:newsId',
         addLike: '/api/newsLikes/addLike',
-        removeLike: '/api/newsLikes/removeLike',
+        removeLike: '/api/newsLikes/removeLike/:id',
     },
+    tags: {
+        getAll: '/api/tags/getAll',
+        getById: '/api/tags/getById/:id',
+        create: '/api/tags/create',
+        update: '/api/tags/update/:id',
+        delete: '/api/tags/delete/:id',
+    },
+    comments: {
+        create: '/admin/comments/create',
+        update: '/admin/comments/update/:id',
+        delete: '/admin/comments/delete/:id',
+    }
 }
-
 
 export {
     baseURL,
@@ -39,3 +55,5 @@ export {
     newsImagesURL,
     urls
 };
+
+

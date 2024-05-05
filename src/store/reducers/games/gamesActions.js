@@ -20,7 +20,7 @@ const fetchGames = () => {
         dispatch(fetchGamesRequest());
 
         try {
-            const response = await axios.get(`${apiBaseURL}${urls.games.all}`);
+            const response = await axios.get(`${apiBaseURL}${urls.games.getAll}`);
             dispatch(fetchGamesSuccess(response.data));
         } catch (error) {
             console.error('Error fetching games:', error);

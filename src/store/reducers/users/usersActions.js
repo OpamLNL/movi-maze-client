@@ -6,7 +6,7 @@ const fetchUsers = () => {
     return async (dispatch) => {
         dispatch(fetchUsersRequest());
         try {
-            const response = await axios.get(`${apiBaseURL}${urls.users.all}`);
+            const response = await axios.get(`${apiBaseURL}${urls.users.getAll}`);
             dispatch(fetchUsersSuccess(response.data));
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -75,8 +75,13 @@ export const createUserFailure = (error) => {
 };
 
 const updateUser = (userId, userData) => {
+    console.log(`${apiBaseURL}${urls.users.update}/${userId}`);
+console.log(userData);
+
     return async (dispatch) => {
         dispatch(fetchUsersRequest());
+
+
         try {
             const response = await axios.put(`${apiBaseURL}${urls.users.update}/${userId}`, userData);
 

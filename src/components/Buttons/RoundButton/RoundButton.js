@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     button: {
-       height: "100%",
+
         margin: "3px",
         display: 'flex',
         alignItems: 'center',
@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '50%',
         padding: '10px',
         cursor: 'pointer',
+        color: theme.palette.primary.light,
         background: theme.palette.primary.contrastText,
         '&:hover': {
             background: '#ddd',

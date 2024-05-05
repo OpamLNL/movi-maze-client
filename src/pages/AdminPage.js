@@ -10,7 +10,6 @@ import {
     TableHead,
     TableRow,
     Tooltip,
-    Button,
     TextField,
     Dialog,
     DialogActions,
@@ -24,7 +23,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { fetchUsers, createUser, deleteUser, updateUser } from '../store/reducers/users/usersActions';
 import { fetchNews, createNews, deleteNews, updateNews } from '../store/reducers/news/newsActions';
 import { fetchGames, createGame, deleteGame, updateGame } from '../store/reducers/games/gamesActions';
-import { RoundButton } from "../components";
+import { RoundButton, Button } from "../components";
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -47,6 +46,11 @@ const useStyles = makeStyles((theme) => ({
     searchInput: {
         marginBottom: theme.spacing(2),
     },
+    functionButton: {
+        marginBottom: theme.spacing(2),
+        width: "7vw",
+        margin: "5 5 5 15",
+    },
 }));
 
 export const AdminPage = () => {
@@ -62,6 +66,9 @@ export const AdminPage = () => {
     const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
     const [itemIdToDelete, setItemIdToDelete] = useState(null);
     const [itemTypeToDelete, setItemTypeToDelete] = useState(null);
+    const [showUsers, setShowUsers] = useState(true);
+    const [showNews, setShowNews] = useState(true);
+    const [showGames, setShowGames] = useState(true);
 
     useEffect(() => {
         dispatch(fetchUsers());
@@ -88,9 +95,10 @@ export const AdminPage = () => {
     };
 
     const handleAddOrUpdateItem = async () => {
+        console.log("aaaaaaaaaaa" + editUser.id);
         if (editUser) {
             if (editUser.id) {
-                await dispatch(updateUser(editUser));
+                await dispatch(updateUser(editUser.id, editUser));
             } else {
                 await dispatch(createUser(editUser));
             }
@@ -152,26 +160,59 @@ export const AdminPage = () => {
         setDeleteConfirmationOpen(false);
     };
 
+    const toggleShowUsers = () => {
+        setShowUsers(!showUsers);
+    };
+
+    const toggleShowNews = () => {
+        setShowNews(!showNews);
+    };
+
+    const toggleShowGames = () => {
+        setShowGames(!showGames);
+    };
+
     return (
         <Container className={classes.container}>
             <div className={css.userFunction}>
-                <h1>Адміністративна панель</h1>
-                <Tooltip title="Додати користувача">
-                    <RoundButton variant="contained" color="primary" onClick={() => handleOpenDialog({ type: 'user' })}>
-                        Користувачі <AddCircleTwoToneIcon />
-                    </RoundButton>
-                </Tooltip>
-                <Tooltip title="Додати новину">
-                    <RoundButton variant="contained" color="primary" onClick={() => handleOpenDialog({ type: 'news' })}>
-                        Новини <AddCircleTwoToneIcon />
-                    </RoundButton>
-                </Tooltip>
-                <Tooltip title="Додати гру">
-                    <RoundButton variant="contained" color="primary" onClick={() => handleOpenDialog({ type: 'game' })}>
-                        Ігри <AddCircleTwoToneIcon />
-                    </RoundButton>
-                </Tooltip>
+                        <div>
+                    <h1>Адміністративна панель</h1>
+                </div>
+
+                        <div className={css.userFunction}>
+                            <Button onClick={toggleShowUsers}>
+                                {showUsers ? 'Сховати користувачів' : 'Показати користувачів'}
+                            </Button>
+                            <Button onClick={toggleShowNews}>
+                                {showNews ? 'Сховати новини' : 'Показати новини'}
+                            </Button>
+                            <Button onClick={toggleShowGames}>
+                                {showGames ? 'Сховати ігри' : 'Показати ігри'}
+                            </Button>
+
+                            <div>
+                                <Tooltip title="Додати користувача" className={classes.functionButton}>
+                                    <RoundButton onClick={() => handleOpenDialog({ type: 'user' })}>
+                                        Користувачі <AddCircleTwoToneIcon />
+                                    </RoundButton>
+                                </Tooltip>
+                                <Tooltip title="Додати новину" className={classes.functionButton}>
+                                    <RoundButton onClick={() => handleOpenDialog({ type: 'news' })}>
+                                        Новини <AddCircleTwoToneIcon />
+                                    </RoundButton>
+                                </Tooltip>
+                                <Tooltip title="Додати гру" className={classes.functionButton}>
+                                    <RoundButton onClick={() => handleOpenDialog({ type: 'game' })}>
+                                        Ігри <AddCircleTwoToneIcon />
+                                    </RoundButton>
+                                </Tooltip>
+                            </div>
+                        </div>
+
+
             </div>
+
+
             <Paper className={classes.container}>
                 <TextField
                     className={classes.searchInput}
@@ -180,97 +221,103 @@ export const AdminPage = () => {
                     size="small"
                     fullWidth
                 />
-                <Table className={classes.table} aria-label="table of users">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell className={classes.tableHead}>ID</TableCell>
-                            <TableCell className={classes.tableHead}>Ім'я користувача</TableCell>
-                            <TableCell className={classes.tableHead}>Email</TableCell>
-                            <TableCell className={classes.tableHead}>Дії</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {users.map((user) => (
-                            <TableRow key={user.id}>
-                                <TableCell>{user.id}</TableCell>
-                                <TableCell>{user.username}</TableCell>
-                                <TableCell>{user.email}</TableCell>
-                                <TableCell>
-                                    <div className={css.userFunction}>
-                                        <Tooltip title="Редагувати користувача">
-                                            <RoundButton color="primary" onClick={() => handleOpenDialog({ type: 'user', item: user })}> <EditNoteRoundedIcon /></RoundButton>
-                                        </Tooltip>
-                                        <Tooltip title="Видалити користувача">
-                                            <RoundButton color="secondary" onClick={() => handleDeleteItem(user.id, 'user')}> <DeleteForeverRoundedIcon /> </RoundButton>
-                                        </Tooltip>
-                                    </div>
-                                </TableCell>
+                {showUsers && (
+                    <Table className={classes.table} aria-label="table of users">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell className={classes.tableHead}>ID</TableCell>
+                                <TableCell className={classes.tableHead}>Ім'я користувача</TableCell>
+                                <TableCell className={classes.tableHead}>Email</TableCell>
+                                <TableCell className={classes.tableHead}>Дії</TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-                <Table className={classes.table} aria-label="table of news">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell className={classes.tableHead}>ID</TableCell>
-                            <TableCell className={classes.tableHead}>Заголовок</TableCell>
-                            <TableCell className={classes.tableHead}>Зміст</TableCell>
-                            <TableCell className={classes.tableHead}>Дії</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {news.map((newsItem) => (
-                            <TableRow key={newsItem.id}>
-                                <TableCell>{newsItem.id}</TableCell>
-                                <TableCell>{newsItem.title}</TableCell>
-                                <TableCell>{newsItem.content}</TableCell>
-                                <TableCell>
-                                    <div className={css.userFunction}>
-                                        <Tooltip title="Редагувати новину">
-                                            <RoundButton color="primary" onClick={() => handleOpenDialog({ type: 'news', item: newsItem })}> <EditNoteRoundedIcon /></RoundButton>
-                                        </Tooltip>
-                                        <Tooltip title="Видалити новину">
-                                            <RoundButton color="secondary" onClick={() => handleDeleteItem(newsItem.id, 'news')}> <DeleteForeverRoundedIcon /> </RoundButton>
-                                        </Tooltip>
-                                    </div>
-                                </TableCell>
+                        </TableHead>
+                        <TableBody>
+                            {users.map((user) => (
+                                <TableRow key={user.id}>
+                                    <TableCell>{user.id}</TableCell>
+                                    <TableCell>{user.username}</TableCell>
+                                    <TableCell>{user.email}</TableCell>
+                                    <TableCell>
+                                        <div className={css.userFunction}>
+                                            <Tooltip title="Редагувати користувача">
+                                                <RoundButton color="primary" onClick={() => handleOpenDialog({ type: 'user', item: user })}> <EditNoteRoundedIcon /></RoundButton>
+                                            </Tooltip>
+                                            <Tooltip title="Видалити користувача">
+                                                <RoundButton color="secondary" onClick={() => handleDeleteItem(user.id, 'user')}> <DeleteForeverRoundedIcon /> </RoundButton>
+                                            </Tooltip>
+                                        </div>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                )}
+                {showNews && (
+                    <Table className={classes.table} aria-label="table of news">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell className={classes.tableHead}>ID</TableCell>
+                                <TableCell className={classes.tableHead}>Заголовок</TableCell>
+                                <TableCell className={classes.tableHead}>Зміст</TableCell>
+                                <TableCell className={classes.tableHead}>Дії</TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-                <Table className={classes.table} aria-label="table of games">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell className={classes.tableHead}>ID</TableCell>
-                            <TableCell className={classes.tableHead}>Заголовок</TableCell>
-                            <TableCell className={classes.tableHead}>Опис</TableCell>
-                            <TableCell className={classes.tableHead}>Постер</TableCell>
-                            <TableCell className={classes.tableHead}>Посилання на гру</TableCell>
-                            <TableCell className={classes.tableHead}>Дії</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {games.map((game) => (
-                            <TableRow key={game.id}>
-                                <TableCell>{game.id}</TableCell>
-                                <TableCell>{game.title}</TableCell>
-                                <TableCell>{game.description}</TableCell>
-                                <TableCell>{game.poster}</TableCell>
-                                <TableCell>{game.link}</TableCell>
-                                <TableCell>
-                                    <div className={css.userFunction}>
-                                        <Tooltip title="Редагувати гру">
-                                            <RoundButton color="primary" onClick={() => handleOpenDialog({ type: 'game', item: game })}> <EditNoteRoundedIcon /></RoundButton>
-                                        </Tooltip>
-                                        <Tooltip title="Видалити гру">
-                                            <RoundButton color="secondary" onClick={() => handleDeleteItem(game.id, 'game')}> <DeleteForeverRoundedIcon /> </RoundButton>
-                                        </Tooltip>
-                                    </div>
-                                </TableCell>
+                        </TableHead>
+                        <TableBody>
+                            {news.map((newsItem) => (
+                                <TableRow key={newsItem.id}>
+                                    <TableCell>{newsItem.id}</TableCell>
+                                    <TableCell>{newsItem.title}</TableCell>
+                                    <TableCell>{newsItem.content}</TableCell>
+                                    <TableCell>
+                                        <div className={css.userFunction}>
+                                            <Tooltip title="Редагувати новину">
+                                                <RoundButton color="primary" onClick={() => handleOpenDialog({ type: 'news', item: newsItem })}> <EditNoteRoundedIcon /></RoundButton>
+                                            </Tooltip>
+                                            <Tooltip title="Видалити новину">
+                                                <RoundButton color="secondary" onClick={() => handleDeleteItem(newsItem.id, 'news')}> <DeleteForeverRoundedIcon /> </RoundButton>
+                                            </Tooltip>
+                                        </div>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                )}
+                {showGames && (
+                    <Table className={classes.table} aria-label="table of games">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell className={classes.tableHead}>ID</TableCell>
+                                <TableCell className={classes.tableHead}>Заголовок</TableCell>
+                                <TableCell className={classes.tableHead}>Опис</TableCell>
+                                <TableCell className={classes.tableHead}>Постер</TableCell>
+                                <TableCell className={classes.tableHead}>Посилання на гру</TableCell>
+                                <TableCell className={classes.tableHead}>Дії</TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                        </TableHead>
+                        <TableBody>
+                            {games.map((game) => (
+                                <TableRow key={game.id}>
+                                    <TableCell>{game.id}</TableCell>
+                                    <TableCell>{game.title}</TableCell>
+                                    <TableCell>{game.description}</TableCell>
+                                    <TableCell>{game.poster}</TableCell>
+                                    <TableCell>{game.link}</TableCell>
+                                    <TableCell>
+                                        <div className={css.userFunction}>
+                                            <Tooltip title="Редагувати гру">
+                                                <RoundButton color="primary" onClick={() => handleOpenDialog({ type: 'game', item: game })}> <EditNoteRoundedIcon /></RoundButton>
+                                            </Tooltip>
+                                            <Tooltip title="Видалити гру">
+                                                <RoundButton color="secondary" onClick={() => handleDeleteItem(game.id, 'game')}> <DeleteForeverRoundedIcon /> </RoundButton>
+                                            </Tooltip>
+                                        </div>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                )}
             </Paper>
             <Dialog open={openDialog} onClose={handleCloseDialog}>
                 <DialogTitle>{editUser?.id ? 'Редагувати користувача' : editNews?.id ? 'Редагувати новину' : editGame?.id ? 'Редагувати гру' : 'Додати'}</DialogTitle>
