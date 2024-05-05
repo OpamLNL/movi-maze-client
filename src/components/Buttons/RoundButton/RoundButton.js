@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     button: {
-        height: "100%",
+       height: "100%",
         margin: "3px",
         display: 'flex',
         alignItems: 'center',

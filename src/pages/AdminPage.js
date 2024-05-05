@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import css from './AdminPage.module.css';
-
 import {
     Container,
     Paper,
@@ -19,16 +17,13 @@ import {
     DialogContent,
     DialogTitle,
 } from '@mui/material';
-
 import AddCircleTwoToneIcon from '@mui/icons-material/AddCircleTwoTone';
 import EditNoteRoundedIcon from '@mui/icons-material/EditNoteRounded';
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
-
-
 import { makeStyles } from '@material-ui/core/styles';
-
 import { fetchUsers, createUser, deleteUser, updateUser } from '../store/reducers/users/usersActions';
 import { fetchNews, createNews, deleteNews, updateNews } from '../store/reducers/news/newsActions';
+import { fetchGames, createGame, deleteGame, updateGame } from '../store/reducers/games/gamesActions';
 import { RoundButton } from "../components";
 
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(4),
     },
     table: {
-
         minWidth: "97%",
     },
     tableHead: {
@@ -60,13 +54,19 @@ export const AdminPage = () => {
     const dispatch = useDispatch();
     const users = useSelector(state => state.users.users);
     const news = useSelector(state => state.news.news);
+    const games = useSelector(state => state.games.games);
     const [openDialog, setOpenDialog] = useState(false);
     const [editUser, setEditUser] = useState(null);
     const [editNews, setEditNews] = useState(null);
+    const [editGame, setEditGame] = useState(null);
+    const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+    const [itemIdToDelete, setItemIdToDelete] = useState(null);
+    const [itemTypeToDelete, setItemTypeToDelete] = useState(null);
 
     useEffect(() => {
         dispatch(fetchUsers());
         dispatch(fetchNews());
+        dispatch(fetchGames());
     }, [dispatch]);
 
     const handleOpenDialog = (item = null) => {
@@ -74,6 +74,8 @@ export const AdminPage = () => {
             setEditUser(item.item);
         } else if (item.type === 'news') {
             setEditNews(item.item);
+        } else if (item.type === 'game') {
+            setEditGame(item.item);
         }
         setOpenDialog(true);
     };
@@ -82,6 +84,7 @@ export const AdminPage = () => {
         setOpenDialog(false);
         setEditUser(null);
         setEditNews(null);
+        setEditGame(null);
     };
 
     const handleAddOrUpdateItem = async () => {
@@ -99,32 +102,58 @@ export const AdminPage = () => {
                 await dispatch(createNews(editNews));
             }
             dispatch(fetchNews());
+        } else if (editGame) {
+            if (editGame.id) {
+                await dispatch(updateGame(editGame));
+            } else {
+                await dispatch(createGame(editGame));
+            }
+            dispatch(fetchGames());
         }
         handleCloseDialog();
     };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        if (editUser) {
+        if (editUser !== null) {
             setEditUser((prev) => ({ ...prev, [name]: value }));
-        } else if (editNews) {
+        } else if (editNews !== null) {
             setEditNews((prev) => ({ ...prev, [name]: value }));
+        } else if (editGame !== null) {
+            setEditGame((prev) => ({ ...prev, [name]: value }));
         }
     };
 
     const handleDeleteItem = async (itemId, type) => {
-        if (type === 'user') {
-            await dispatch(deleteUser(itemId));
-            dispatch(fetchUsers());
-        } else if (type === 'news') {
-            await dispatch(deleteNews(itemId));
-            dispatch(fetchNews());
+        setItemIdToDelete(itemId);
+        setItemTypeToDelete(type);
+        setDeleteConfirmationOpen(true);
+    };
+
+    const confirmDelete = async () => {
+        if (itemIdToDelete && itemTypeToDelete) {
+            if (itemTypeToDelete === 'user') {
+                await dispatch(deleteUser(itemIdToDelete));
+                dispatch(fetchUsers());
+            } else if (itemTypeToDelete === 'news') {
+                await dispatch(deleteNews(itemIdToDelete));
+                dispatch(fetchNews());
+            } else if (itemTypeToDelete === 'game') {
+                await dispatch(deleteGame(itemIdToDelete));
+                dispatch(fetchGames());
+            }
         }
+        setDeleteConfirmationOpen(false);
+    };
+
+    const cancelDelete = () => {
+        setItemIdToDelete(null);
+        setItemTypeToDelete(null);
+        setDeleteConfirmationOpen(false);
     };
 
     return (
         <Container className={classes.container}>
-
             <div className={css.userFunction}>
                 <h1>Адміністративна панель</h1>
                 <Tooltip title="Додати користувача">
@@ -137,8 +166,12 @@ export const AdminPage = () => {
                         Новини <AddCircleTwoToneIcon />
                     </RoundButton>
                 </Tooltip>
+                <Tooltip title="Додати гру">
+                    <RoundButton variant="contained" color="primary" onClick={() => handleOpenDialog({ type: 'game' })}>
+                        Ігри <AddCircleTwoToneIcon />
+                    </RoundButton>
+                </Tooltip>
             </div>
-
             <Paper className={classes.container}>
                 <TextField
                     className={classes.searchInput}
@@ -205,11 +238,44 @@ export const AdminPage = () => {
                         ))}
                     </TableBody>
                 </Table>
+                <Table className={classes.table} aria-label="table of games">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell className={classes.tableHead}>ID</TableCell>
+                            <TableCell className={classes.tableHead}>Заголовок</TableCell>
+                            <TableCell className={classes.tableHead}>Опис</TableCell>
+                            <TableCell className={classes.tableHead}>Постер</TableCell>
+                            <TableCell className={classes.tableHead}>Посилання на гру</TableCell>
+                            <TableCell className={classes.tableHead}>Дії</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {games.map((game) => (
+                            <TableRow key={game.id}>
+                                <TableCell>{game.id}</TableCell>
+                                <TableCell>{game.title}</TableCell>
+                                <TableCell>{game.description}</TableCell>
+                                <TableCell>{game.poster}</TableCell>
+                                <TableCell>{game.link}</TableCell>
+                                <TableCell>
+                                    <div className={css.userFunction}>
+                                        <Tooltip title="Редагувати гру">
+                                            <RoundButton color="primary" onClick={() => handleOpenDialog({ type: 'game', item: game })}> <EditNoteRoundedIcon /></RoundButton>
+                                        </Tooltip>
+                                        <Tooltip title="Видалити гру">
+                                            <RoundButton color="secondary" onClick={() => handleDeleteItem(game.id, 'game')}> <DeleteForeverRoundedIcon /> </RoundButton>
+                                        </Tooltip>
+                                    </div>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
             </Paper>
             <Dialog open={openDialog} onClose={handleCloseDialog}>
-                <DialogTitle>{editUser?.id ? 'Редагувати користувача' : editNews?.id ? 'Редагувати новину' : 'Додати'}</DialogTitle>
+                <DialogTitle>{editUser?.id ? 'Редагувати користувача' : editNews?.id ? 'Редагувати новину' : editGame?.id ? 'Редагувати гру' : 'Додати'}</DialogTitle>
                 <DialogContent>
-                    {editUser || editNews ? (
+                    {editUser !== null || editNews !== null ? (
                         <>
                             <TextField
                                 autoFocus
@@ -230,6 +296,50 @@ export const AdminPage = () => {
                                 fullWidth
                                 variant="outlined"
                                 value={editUser?.email || ''}
+                                onChange={handleChange}
+                            />
+                        </>
+                    ) : editGame !== null ? (
+                        <>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                name="title"
+                                label="Заголовок"
+                                type="text"
+                                fullWidth
+                                variant="outlined"
+                                value={editGame?.title || ''}
+                                onChange={handleChange}
+                            />
+                            <TextField
+                                margin="dense"
+                                name="description"
+                                label="Опис"
+                                type="text"
+                                fullWidth
+                                variant="outlined"
+                                value={editGame?.description || ''}
+                                onChange={handleChange}
+                            />
+                            <TextField
+                                margin="dense"
+                                name="poster"
+                                label="Постер"
+                                type="text"
+                                fullWidth
+                                variant="outlined"
+                                value={editGame?.poster || ''}
+                                onChange={handleChange}
+                            />
+                            <TextField
+                                margin="dense"
+                                name="link"
+                                label="Посилання на гру"
+                                type="text"
+                                fullWidth
+                                variant="outlined"
+                                value={editGame?.link || ''}
                                 onChange={handleChange}
                             />
                         </>
@@ -265,6 +375,28 @@ export const AdminPage = () => {
                     </Button>
                     <Button onClick={handleAddOrUpdateItem} color="primary">
                         Зберегти
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            <Dialog
+                open={deleteConfirmationOpen}
+                onClose={cancelDelete}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Підтвердження видалення"}</DialogTitle>
+                <DialogContent>
+                    <DialogContent id="alert-dialog-description">
+                        Ви впевнені, що хочете видалити цей елемент?
+                    </DialogContent>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={cancelDelete} color="primary">
+                        Ні
+                    </Button>
+                    <Button onClick={confirmDelete} color="primary" autoFocus>
+                        Так
                     </Button>
                 </DialogActions>
             </Dialog>

@@ -17,7 +17,7 @@ const gamesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                games: [...action.payload.map(game => ({ ...game }))], // Глибока копія кожної гри
+                games: [...action.payload.map(game => ({ ...game }))],
                 error: '',
             };
         case FETCH_GAMES_FAILURE:
