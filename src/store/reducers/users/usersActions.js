@@ -1,8 +1,22 @@
 import axios from 'axios';
 import { apiBaseURL, urls } from "../../../configs/urls";
-import { FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE, CREATE_USER_SUCCESS, CREATE_USER_FAILURE, UPDATE_USER_SUCCESS, UPDATE_USER_FAILURE, DELETE_USER_SUCCESS, DELETE_USER_FAILURE, AUTHENTICATE_USER } from './usersTypes';
+import {
+    FETCH_USERS_REQUEST,
+    FETCH_USERS_SUCCESS,
+    FETCH_USERS_FAILURE,
+    CREATE_USER_SUCCESS,
+    CREATE_USER_FAILURE,
+    UPDATE_USER_SUCCESS,
+    UPDATE_USER_FAILURE,
+    DELETE_USER_SUCCESS,
+    DELETE_USER_FAILURE,
+    AUTHENTICATE_USER,
+    FETCH_USER_BY_USERNAME_FAILURE,
+    FETCH_USER_BY_USERNAME_SUCCESS,
+    FETCH_USER_BY_USERNAME_REQUEST
+} from './usersTypes';
 
-const fetchUsers = () => {
+export const fetchUsers = () => {
     return async (dispatch) => {
         dispatch(fetchUsersRequest());
         try {
@@ -35,7 +49,7 @@ export const fetchUsersFailure = (error) => {
     };
 };
 
-const createUser = (userData) => {
+export const createUser = (userData) => {
     return async (dispatch) => {
         dispatch(fetchUsersRequest());
         try {
@@ -74,9 +88,7 @@ export const createUserFailure = (error) => {
     };
 };
 
-const updateUser = (userId, userData) => {
-    console.log(`${apiBaseURL}${urls.users.update}/${userId}`);
-console.log(userData);
+export const updateUser = (userId, userData) => {
 
     return async (dispatch) => {
         dispatch(fetchUsersRequest());
@@ -109,8 +121,7 @@ export const updateUserFailure = (error) => {
     };
 };
 
-const deleteUser = (userId) => {
-    console.log(`${apiBaseURL}${urls.users.delete}/:${userId}`);
+export const deleteUser = (userId) => {
     return async (dispatch) => {
         try {
             await axios.delete(`${apiBaseURL}${urls.users.delete}/:${userId}`);
@@ -136,10 +147,45 @@ export const deleteUserFailure = (error) => {
     };
 };
 
-const logoutUser = () => {
+export const logoutUser = () => {
     return {
         type: 'LOGOUT_USER'
     };
 };
 
-export { fetchUsers, createUser, updateUser, deleteUser, logoutUser };
+
+export const fetchUserByUsername = (username) => {
+    return async (dispatch) => {
+        dispatch(fetchUserByUsernameRequest());
+        try {
+            const response = await axios.get(`${apiBaseURL}${urls.users.getByUsername}/${username}`);
+
+            dispatch(fetchUserByUsernameSuccess(response.data));
+
+        } catch (error) {
+            console.error('Error fetching user by username:', error);
+            dispatch(fetchUserByUsernameFailure(error.message));
+        }
+    };
+};
+
+
+export const fetchUserByUsernameRequest = () => {
+    return {
+        type: FETCH_USER_BY_USERNAME_REQUEST,
+    };
+};
+
+export const fetchUserByUsernameSuccess = (user) => {
+    return {
+        type: FETCH_USER_BY_USERNAME_SUCCESS,
+        payload: user,
+    };
+};
+
+export const fetchUserByUsernameFailure = (error) => {
+    return {
+        type: FETCH_USER_BY_USERNAME_FAILURE,
+        payload: error,
+    };
+};

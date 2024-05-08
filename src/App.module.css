@@ -33,5 +33,13 @@
     align-items: start;
 }
 
+.mainContainerSides{
+    width: 30%;
+    display: flex;
+    margin-top: 15px;
+    justify-content: center;
+    align-items: start;
+}
+
 
 

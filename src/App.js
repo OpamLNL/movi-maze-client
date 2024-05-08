@@ -10,18 +10,22 @@ import { CssBaseline } from '@material-ui/core';
 import css from './App.module.css';
 
 import {    AdminLayout,
-            MainLayout,
             GameLayout,
+            EditProfileLayout,
+            ProfileLayout,
+            MainLayout,
             NewsLayout,
             SignInLayout,
             SignUpLayout
         } from './layouts';
+
 import {
             Header,
             LeftSidebar,
             ServiceBar,
             SectionContainer
         } from './components';
+
 import { ThemeContext} from './themes/theme-context';
 import { lightTheme, darkTheme} from './themes/theme';
 
@@ -64,6 +68,8 @@ export const App = () => {
                                                                 <Route path={'sign-up'} element={<SignUpLayout />} />
                                                                 <Route path={'sign-in'} element={<SignInLayout />} />
                                                                 <Route path={'admin-page'} element={<AdminLayout />} />
+                                                                <Route path={'edit-profile'} element={<EditProfileLayout />} />
+                                                                <Route path={'profile/:username'} element={<ProfileLayout />} />
                                                         </Routes>
                                                     </SectionContainer>
                                                 </div>

@@ -45,7 +45,6 @@ export const SignInPage = () => {
         } catch (error) {
             const errorMsg = error.response?.data?.message || 'Невідома помилка';
             setError('Не вдалося ввійти: ' + errorMsg);
-            //console.error('Помилка при вході:', error.response || error.message);
         }
     };
 
@@ -88,7 +87,7 @@ export const SignInPage = () => {
                     {error && <Typography color="error">{error}</Typography>}
                 </form>
                 <Typography>
-                    Ще не маєте облікового запису? <Link href="/signup" color="inherit">Зареєструйтеся</Link>
+                    Ще не маєте облікового запису? <Link href="/sign-up" color="inherit">Зареєструйтеся</Link>
                 </Typography>
             </ContrastContainer>
         </div>

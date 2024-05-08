@@ -95,7 +95,6 @@ export const AdminPage = () => {
     };
 
     const handleAddOrUpdateItem = async () => {
-        console.log("aaaaaaaaaaa" + editUser.id);
         if (editUser) {
             if (editUser.id) {
                 await dispatch(updateUser(editUser.id, editUser));

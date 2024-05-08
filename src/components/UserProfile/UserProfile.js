@@ -8,7 +8,8 @@ import { logoutUser } from '../../store/reducers/users/usersActions';
 import {
     CardContent,
     Avatar,
-    Typography } from '@mui/material';
+    Typography, Link
+} from '@mui/material';
 
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
@@ -39,10 +40,9 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(2),
     },
     avatar: {
+        height: '58px',
+        width: '58px',
         margin: 'auto',
-        width: theme.spacing(12),
-        height: theme.spacing(12),
-        marginBottom: theme.spacing(2),
     },
     inputField: {
         '& .MuiInputBase-input': {
@@ -65,6 +65,11 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1, 0),
     },
     button: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '58px',
+        width: '58px',
         margin: theme.spacing(2, 0),
         backgroundColor: theme.palette.primary.contrastText,
         color: '#fff',
@@ -108,15 +113,26 @@ export const UserProfile = () => {
             </Container3d>
         );
     }
+    const encodedUsername = encodeURIComponent(user.username);
 
     return (
         <Container3d >
             <CardContent>
                 <div className={css.userFunction}>
-                    <Avatar alt={user.username} src={IMG_API + user.avatar} className={classes.avatar} />
-                    <Typography variant="h4" className={classes.title}>
-                        {user.username}
-                    </Typography>
+
+                    <RoundButton className={classes.button} onClick={() => navigate(`/profile/${encodedUsername}`)}>
+                        <Avatar className={classes.avatar}
+                            alt={user.username}
+                            src={IMG_API + user.avatar}
+                            className={classes.avatar}
+                        />
+                    </RoundButton>
+
+                        <Link to={`/profile/${user.id}`}>
+                            <Typography variant="h4" className={classes.title}>
+                                {user.username}
+                            </Typography>
+                        </Link>
                 </div>
                     <Typography> {user.email} </Typography>
 

@@ -4,10 +4,12 @@ import { fetchUsers } from '../../store/reducers/users/usersActions';
 import { selectUsers, selectUsersLoading, selectUsersError } from '../../store/reducers/users/usersSelectors';
 import css from './UserList.module.css';
 import {UserListItem} from "../ListItems";
-import {Avatar} from "@mui/material";
+import { Avatar } from "@mui/material";
+import { RoundButton } from "../../components";
 import {SectionContainer} from "../Containers";
 
 import { apiBaseURL, avatarsURL } from "../../configs/urls";
+import {useNavigate} from "react-router-dom";
 
 
 const IMG_API = apiBaseURL + avatarsURL;
@@ -18,6 +20,7 @@ const UserList = () => {
     const users = useSelector(selectUsers);
     const loading = useSelector(selectUsersLoading);
     const error = useSelector(selectUsersError);
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(fetchUsers());
@@ -44,16 +47,22 @@ const UserList = () => {
         return 0;
     });
 
+
     return (
         <SectionContainer title="Зараз на сайті">
             {sortedUsers.map((user, index) => (
-                <UserListItem key={user.id}>
-                    <Avatar
-                        src={IMG_API + user.avatar}
-                        sx={{ width: 24, height: 24 }}
-                    />
-                    {user.role} {user.username}
+                <UserListItem key={user.id} >
+
+                    <RoundButton onClick={() => navigate(`/profile/${encodeURIComponent(user.username)}`)}>
+                        <Avatar
+                            src={IMG_API + user.avatar}
+                            sx={{ width: 24, height: 24 }}
+                        />
+                    </RoundButton>
+                        {user.username}
                 </UserListItem>
+
+
             ))}
         </SectionContainer>
     );

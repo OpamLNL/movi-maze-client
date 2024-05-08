@@ -11,7 +11,7 @@ import { LogoImage } from '../../components';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        color: theme.palette.text.contrastText,
+        color: theme.palette.primary.light,
         backgroundColor: "#1e1633",
         
     },
