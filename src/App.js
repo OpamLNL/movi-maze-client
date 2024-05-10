@@ -70,6 +70,7 @@ export const App = () => {
                                                                 <Route path={'admin-page'} element={<AdminLayout />} />
                                                                 <Route path={'edit-profile'} element={<EditProfileLayout />} />
                                                                 <Route path={'profile/:username'} element={<ProfileLayout />} />
+                                                                <Route path={'gamePage/:id'} element={<GameLayout />} />
                                                         </Routes>
                                                     </SectionContainer>
                                                 </div>

@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGames } from '../../store/reducers/games/gamesActions';
 import { selectGames, selectGamesLoading, selectGamesError } from '../../store/reducers/games/gamesSelectors';
-import {GameListItem} from "../ListItems";
+import { Link } from 'react-router-dom';
+import { GameListItem } from "../ListItems";
 
 const GameList = () => {
     const dispatch = useDispatch();
@@ -25,12 +26,13 @@ const GameList = () => {
     const sortedGames = [...games].sort((a, b) => a.title.localeCompare(b.title));
     return (
         <div>
-                {sortedGames && sortedGames.map((game) => (
-
-                    <GameListItem key={game.id}>
+            {sortedGames.map((game) => (
+                <Link to={'/gamePage/${game.id}'} key={game.id} style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <GameListItem>
                         {game.title} - {game.developer}
                     </GameListItem>
-                ))}
+                </Link>
+            ))}
         </div>
     );
 };
