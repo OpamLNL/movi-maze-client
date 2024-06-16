@@ -1,9 +1,9 @@
-import { GamesPage } from "../pages/GamesPage";
+import { GamePage } from "../pages/GamePage";
 
 export const GameLayout = () => {
     return (
         <div>
-            <GamesPage />
+            <GamePage />
         </div>
     );
 };

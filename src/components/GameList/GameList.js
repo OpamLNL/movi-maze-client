@@ -27,7 +27,7 @@ const GameList = () => {
     return (
         <div>
             {sortedGames.map((game) => (
-                <Link to={'/gamePage/${game.id}'} key={game.id} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <Link to={`/gamePage/${game.id}`} key={game.id} style={{ textDecoration: 'none', color: 'inherit' }}>
                     <GameListItem>
                         {game.title} - {game.developer}
                     </GameListItem>

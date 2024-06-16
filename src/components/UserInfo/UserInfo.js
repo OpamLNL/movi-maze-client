@@ -1,37 +1,42 @@
 import {useContext} from 'react';
 
 import css from './UserInfo.module.css';
-
 import {Avatar, Typography} from "@mui/material";
 import {ThemeContext} from "../../themes/theme-context";
+import {RoundButton} from "../Buttons";
+import {useNavigate} from "react-router-dom";
+import {apiBaseURL, avatarsURL} from "../../configs/urls";
 
-const UserInfo = ({name, email, avatarUrl}) => {
+
+const IMG_API = apiBaseURL + avatarsURL;
+
+const UserInfo = ({user}) => {
     const {theme} = useContext(ThemeContext);
+    console.log(localStorage.getItem('user'));
+    const navigate = useNavigate();
 
+    console.log(user);
     return(
                 <div className={css.userCard}>
 
-                    <Avatar
-                        alt="Remy Sharp"
-                        src= {avatarUrl}
-                        sx={{ width: 56, height: 56 }}
-                    />
+                    <RoundButton onClick={() => navigate(`/profile/${encodeURIComponent(user.username)}`)}>
+                        <Avatar
+                            src={IMG_API + user.avatar}
+                            sx={{ width: 24, height: 24 }}
+                        />
+                    </RoundButton>
                     <div className={css.userCardText}>
-                        <Typography  component={theme.components.MuiTypography.defaultProps.variantMapping.subtitle1} color={theme.palette.primary.contrastText}>
-                            {name}
+                        <Typography
+                            component={theme.components.MuiTypography.defaultProps.variantMapping.subtitle1}
+                            color={theme.palette.primary.contrastText}>
+                            {user.name}
                             <br/>
-                            {email}
+                            {user.email}
                         </Typography>
                     </div>
                 </div>
     );
 };
 
-// UserInfo.propTypes = {
-//     name: PropTypes.string,
-//     size: PropTypes.number,
-//     onClick: PropTypes.func,
-//     disabled: PropTypes.bool,
-// };
 
 export {UserInfo};

@@ -151,7 +151,7 @@ export const SignUpPage = () => {
                     </Button>
                 </form>
                 <Typography>
-                    Ще не маєте облікового запису? <Link href="/login" color="inherit">Увійдіть</Link>
+                    Ще не маєте облікового запису? <Link href="/sign-in" color="inherit">Увійдіть</Link>
                 </Typography>
             </SectionContainer>
         </div>

@@ -17,10 +17,10 @@ const urls = {
     },
     games: {
         getAll: '/api/games/getAll',
-        getById: '/api/games/getGameById/:id',
+        getById: '/api/games/getGameById',
         create: '/api/games/create',
-        update: '/api/games/update/:id',
-        delete: '/api/games/delete/:id',
+        update: '/api/games/update',
+        delete: '/api/games/delete',
     },
     news: {
         getAll: '/api/news/getAll',

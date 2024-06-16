@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import './Badge.css';
+import {Button} from "@mui/material";
+import {Icon} from "../Icon/Icon";
 
 const Badge = ({
                    value, circle, className, inline, outer, ...attrs
@@ -23,9 +25,9 @@ const Badge = ({
     );
 
     return (
-        <span className={classes}>
-      { value }
-    </span>
+        <div className={classes}>
+            { value }
+        </div>
     );
 };
 

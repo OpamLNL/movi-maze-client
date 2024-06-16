@@ -24,7 +24,7 @@ export const GameListItem = ( {children}) => {
     const classes = useStyles();
 
     return (
-        <div className={classes.listItem}>
+        <div className={classes.listItem} >
             {children}
         </div>
     );

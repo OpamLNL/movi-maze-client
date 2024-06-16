@@ -50,6 +50,9 @@ export const SignInPage = () => {
 
     return (
         <div className={classes.form}>
+            <Typography>
+                Ще не маєте облікового запису? <Link href="/sign-up" color="inherit">Зареєструйтеся</Link>
+            </Typography>
             <ContrastContainer title="Вхід">
                 <form onSubmit={handleSubmit}>
                     <TextField
@@ -86,9 +89,8 @@ export const SignInPage = () => {
                     </Button>
                     {error && <Typography color="error">{error}</Typography>}
                 </form>
-                <Typography>
-                    Ще не маєте облікового запису? <Link href="/sign-up" color="inherit">Зареєструйтеся</Link>
-                </Typography>
+
+
             </ContrastContainer>
         </div>
     );

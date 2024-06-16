@@ -6,17 +6,17 @@ import {
 } from './tagsTypes';
 import axios from 'axios';
 
+import { apiBaseURL, urls } from "../../../configs/urls";
+
 export const fetchTagsRequest = () => ({ type: FETCH_TAGS_REQUEST });
 export const fetchTagsSuccess = (tags) => ({ type: FETCH_TAGS_SUCCESS, payload: tags });
 export const fetchTagsFailure = (error) => ({ type: FETCH_TAGS_FAILURE, payload: error });
 
-// Thunk action для завантаження тегів
 export const fetchTags = () => {
     return async (dispatch) => {
         dispatch(fetchTagsRequest());
         try {
-            // Визначте URL вашого API для отримання тегів
-            const response = await axios.get('/api/tags');
+            const response = await axios.get(`${apiBaseURL}${urls.tags.getAll}`);
             dispatch(fetchTagsSuccess(response.data));
         } catch (error) {
             dispatch(fetchTagsFailure(error.message));
