@@ -38,6 +38,8 @@ export const ServiceSidebar = () => {
     const navigate = useNavigate();
 
 
+
+
     useEffect(() => {
         dispatch(fetchUsers());
     }, [dispatch]);
@@ -49,7 +51,7 @@ export const ServiceSidebar = () => {
                     <div className={css.profile}>
                         {user && <UserProfile user={user} />}
 
-                        { !user &&
+                        { !localStorage.getItem('user') &&
        
                             <Container3d >
                                 <CardContent >
