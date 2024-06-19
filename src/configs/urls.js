@@ -8,7 +8,7 @@ const newsImagesURL = '/images/newsImages/';
 
 const urls = {
     users: {
-        getAll: '/api/users/getAll',
+        getAll: 'api/users/getAll',
         getById: '/api/users/getUserById',
         getByUsername: '/api/users/getUserByUsername',
         create: '/api/users/create',
