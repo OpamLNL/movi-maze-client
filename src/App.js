@@ -10,6 +10,7 @@ import { CssBaseline } from '@material-ui/core';
 import css from './App.module.css';
 
 import {    AdminLayout,
+            ContactLayout,
             GameLayout,
             GamesLayout,
             EditProfileLayout,
