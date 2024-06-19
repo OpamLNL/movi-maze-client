@@ -33,6 +33,7 @@ import { lightTheme, darkTheme} from './themes/theme';
 import { LanguageProvider } from './language/language-context';
 import { ServiceSidebar } from "./components/ServiceSidebar/ServiceSidebar";
 import { GamePage } from "./pages/GamePage";
+import { ContactLayout } from './layouts/ContactLayout';
 
 export const App = () => {
 
@@ -73,6 +74,8 @@ export const App = () => {
                                                                 <Route path={'edit-profile'} element={<EditProfileLayout />} />
                                                                 <Route path={'profile/:username'} element={<ProfileLayout />} />
                                                                 <Route path={'gamePage/:id'} element={<GamePage />} />
+
+                                                                <Route path={'contact'} element={<ContactLayout />} />
                                                         </Routes>
                                                     </SectionContainer>
                                                 </div>
@@ -82,6 +85,7 @@ export const App = () => {
 
                         <ServiceSidebar />
                     </div>
+                    Uzhgorod 2024
                 </ThemeProvider>
                 </ThemeContext.Provider>
             </LanguageProvider>

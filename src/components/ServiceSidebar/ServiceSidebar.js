@@ -37,8 +37,6 @@ export const ServiceSidebar = () => {
 
     const navigate = useNavigate();
 
-console.log(localStorage.getItem('user'));
-
 
     useEffect(() => {
         dispatch(fetchUsers());
