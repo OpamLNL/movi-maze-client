@@ -34,7 +34,6 @@ import { lightTheme, darkTheme} from './themes/theme';
 import { LanguageProvider } from './language/language-context';
 import { ServiceSidebar } from "./components/ServiceSidebar/ServiceSidebar";
 import { GamePage } from "./pages/GamePage";
-import { ContactLayout } from './layouts/ContactLayout';
 
 export const App = () => {
 
