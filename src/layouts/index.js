@@ -7,4 +7,4 @@ export * from './SignUpLayout';
 export * from './AdminLayout';
 export * from './EditProfileLayout';
 export * from './ProfileLayout';
-
+export * from './ContactLayout';
