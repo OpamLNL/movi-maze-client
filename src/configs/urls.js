@@ -1,6 +1,6 @@
 
 const baseURL = 'https://api.themoviedb.org'
-const apiBaseURL = 'http://localhost:5000';
+const apiBaseURL = 'https://move-maze-server.vercel.app/';
 const postersURL = '/images/posters/';
 const gamesURL = '/games-repository/';
 const avatarsURL = '/images/avatars/';
