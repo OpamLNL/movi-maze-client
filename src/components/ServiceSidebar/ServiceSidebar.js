@@ -33,6 +33,20 @@ export const ServiceSidebar = () => {
                 <div className={css.mainSide}>
                     <div className={css.profile}>
                         {user && <UserProfile user={user} />}
+
+                        { !user &&
+       
+                            <Container3d >
+                                <CardContent >
+                                    <Typography variant="h6">Please sign in</Typography>
+                                    <div className={css.userFunction}>
+                                        <RoundButton className={classes.button} onClick={() => navigate('/sign-in')}> <LoginRounded /> </RoundButton>
+                                        <RoundButton className={classes.button} onClick={() => navigate('/sign-up')}> <SignpostRounded /> </RoundButton>
+                                    </div>
+                                </CardContent>
+                            </Container3d>
+                        }
+    
                     </div>
 
                     <div className={css.mainContainerSides}>
