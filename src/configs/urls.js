@@ -1,6 +1,6 @@
 
 const baseURL = 'https://api.themoviedb.org'
-const apiBaseURL = 'https://move-maze-server.vercel.app/';
+const apiBaseURL = 'https://move-maze-server.vercel.app';
 const postersURL = '/images/posters/';
 const gamesURL = '/games-repository/';
 const avatarsURL = '/images/avatars/';
@@ -8,7 +8,7 @@ const newsImagesURL = '/images/newsImages/';
 
 const urls = {
     users: {
-        getAll: 'api/users/getAll',
+        getAll: '/api/users/getAll',
         getById: '/api/users/getUserById',
         getByUsername: '/api/users/getUserByUsername',
         create: '/api/users/create',
