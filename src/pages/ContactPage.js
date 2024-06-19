@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Paper } from '@mui/material';
 
-import logo from '../assets/transparent_home.png';
+import logo from '../assets/logo.webp';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
