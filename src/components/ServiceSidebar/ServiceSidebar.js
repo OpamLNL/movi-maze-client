@@ -49,7 +49,7 @@ console.log(localStorage.getItem('user'));
     return (
                 <div className={css.mainSide}>
                     <div className={css.profile}>
-                        {user && <UserProfile user={user} />}
+                        {localStorage.getItem('user')  && <UserProfile user={user} />}
 
                         { !localStorage.getItem('user') &&
        
