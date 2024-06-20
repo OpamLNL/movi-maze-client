@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
         // boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
         display: 'flex',
         flexDirection: 'row',
+        flexWrap: 'wrap',
         gap: theme.spacing(2),
         alignItems: 'center',
     },
@@ -31,6 +32,7 @@ export const SearchResultPage = () => {
     const [loading, setLoading] = useState(true);
     const language = useContext(LanguageContext);
     const games = useSelector(selectGames);
+    const tags = useSelector(state => state.tags.tags);
 
     useEffect(() => {
         setLoading(false);
@@ -44,16 +46,23 @@ export const SearchResultPage = () => {
         );
     }
 
-
+    const tagNames = (id) => {
+        const tag = tags.find(t => t.id.toString() === id);
+        return tag ? tag.name : null;
+    };
 
     const filteredGames = games
-        .filter(game => game.description.toLowerCase().includes(searchKey.toLowerCase()))
+        .filter(game =>
+            game.description.toLowerCase().includes(searchKey.toLowerCase()) ||
+            game.tags_ids.split(',').includes(searchKey)
+        )
         .sort((a, b) => a.title.localeCompare(b.title));
+
 
     return (
         <div>
                 <Typography variant="h5" gutterBottom>
-                    {language.language === 'uk-UA' ? 'Шукаємо: ' : 'Search: '}{searchKey}
+                    {language.language === 'uk-UA' ? 'Шукаємо: ' : 'Search: '}{  tagNames(searchKey)  }
                 </Typography>
 
                 <div className={classes.searchResultContainer}>

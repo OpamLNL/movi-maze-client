@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getTags } from "../../store/reducers/tags/tagsSelectors";
 import { fetchTags } from "../../store/reducers/tags/tagsActions";
-import { Button, Icon } from "../../components";
 import Badge from '@mui/material/Badge';
 import { LanguageContext } from "../../language/language-context";
 
 import css from './TagBadge.module.css';
+import {useNavigate} from "react-router-dom";
 
 export const TagBadge = ({ tagIds }) => {
 
@@ -15,7 +15,11 @@ export const TagBadge = ({ tagIds }) => {
     const language = useContext(LanguageContext);
     const dispatch = useDispatch();
     const tags = useSelector(getTags);
+    const navigate = useNavigate();
 
+    const handleBadgeClick = (id) => {
+        navigate(`/search-result/${id}`);
+    };
 
     useEffect(() => {
         if (!tags.length) {
@@ -32,12 +36,10 @@ export const TagBadge = ({ tagIds }) => {
             {tagNames.length > 0 ? (
                 tagNames
                     .map(tag => (
-                        // <Button key={tag.id} style={{ marginRight: '20px', widths: '2px' }}>
-                            // {/*<Icon name="tag" />*/}
-                             <Badge  key={tag.id} className={css.badge}>
+                             <Badge  key={tag.id} className={css.badge} onClick={() => handleBadgeClick(tag.id)}>
                                  {tag.name}
+
                              </Badge>
-                         // </Button>
                     ))
             ) : (
                 <div >...</div>

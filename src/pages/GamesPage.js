@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchGames} from "../store/reducers/games/gamesActions";
-import { GameCard } from "../components";
+import {GameCard, TagCloud} from "../components";
 import css from "./GamesPage.module.css";
 import {selectGames} from "../store/reducers/games/gamesSelectors";
 
@@ -18,6 +18,7 @@ export const GamesPage = () => {
 
     return (
         <div className={css.gamesListPage}>
+            <TagCloud />
             <div className={css.gamesListBlock}>
                 {games.map((game) => (
                     <GameCard key={game.id} game={game} />

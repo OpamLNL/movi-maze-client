@@ -25,6 +25,7 @@ export {SearchBar} from './SearchBar/SearchBar';
 export {ServiceBar} from './ServiceBar/ServiceBar';
 export {StarsRating} from './StarsRating/StarsRating';
 export {TagBadge} from './TagBadge/TagBadge';
+export {TagCloud} from './TagCloud/TagCloud';
 export {ThemeSwitcher} from './ThemeSwitcher/ThemeSwitcher';
 export {UserInfo} from './UserInfo/UserInfo';
 export {UserList} from './UserList/UserList';
