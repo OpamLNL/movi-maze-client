@@ -77,9 +77,15 @@ export const AdminPage = () => {
     }, [dispatch]);
 
     const handleOpenDialog = (item = null) => {
+        setEditUser(null);
+        setEditNews(null);
+        setEditGame(null);
+
+
         if (item.type === 'user') {
             setEditUser(item.item);
         } else if (item.type === 'news') {
+            console.log(item.type);
             setEditNews(item.item);
         } else if (item.type === 'game') {
             setEditGame(item.item);
@@ -174,10 +180,11 @@ export const AdminPage = () => {
     return (
         <Container className={classes.container}>
             <div>
-                    <h1>Адміністративна панель</h1>
+                <h1>Адміністративна панель</h1>
             </div>
+
             <div className={css.userFunction}>
-                       
+
 
                         <div className={css.userFunction}>
                             <Button onClick={toggleShowUsers}>
@@ -322,7 +329,7 @@ export const AdminPage = () => {
             <Dialog open={openDialog} onClose={handleCloseDialog}>
                 <DialogTitle>{editUser?.id ? 'Редагувати користувача' : editNews?.id ? 'Редагувати новину' : editGame?.id ? 'Редагувати гру' : 'Додати'}</DialogTitle>
                 <DialogContent>
-                    {editUser !== null || editNews !== null ? (
+                    {editUser !== null ? (
                         <>
                             <TextField
                                 autoFocus
@@ -343,6 +350,30 @@ export const AdminPage = () => {
                                 fullWidth
                                 variant="outlined"
                                 value={editUser?.email || ''}
+                                onChange={handleChange}
+                            />
+                        </>
+                    ) : editNews !== null ? (
+                        <>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                name="title"
+                                label="Заголовок"
+                                type="text"
+                                fullWidth
+                                variant="outlined"
+                                value={editNews?.title || ''}
+                                onChange={handleChange}
+                            />
+                            <TextField
+                                margin="dense"
+                                name="content"
+                                label="Зміст"
+                                type="text"
+                                fullWidth
+                                variant="outlined"
+                                value={editNews?.content || ''}
                                 onChange={handleChange}
                             />
                         </>
@@ -390,32 +421,9 @@ export const AdminPage = () => {
                                 onChange={handleChange}
                             />
                         </>
-                    ) : (
-                        <>
-                            <TextField
-                                autoFocus
-                                margin="dense"
-                                name="title"
-                                label="Заголовок"
-                                type="text"
-                                fullWidth
-                                variant="outlined"
-                                value={editNews?.title || ''}
-                                onChange={handleChange}
-                            />
-                            <TextField
-                                margin="dense"
-                                name="content"
-                                label="Зміст"
-                                type="text"
-                                fullWidth
-                                variant="outlined"
-                                value={editNews?.content || ''}
-                                onChange={handleChange}
-                            />
-                        </>
-                    )}
+                    ) : null}
                 </DialogContent>
+
                 <DialogActions>
                     <Button onClick={handleCloseDialog} color="primary">
                         Скасувати
