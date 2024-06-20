@@ -74,10 +74,8 @@ export const GamePage = () => {
             <Typography variant="h5" gutterBottom>{gameData[0].title}</Typography>
             <img src={IMG_API + gameData[0].poster_url} alt="Game Poster" className={classes.gamePoster} />
             <Box>
-                <Typography className={classes.gameLabel}>Developer:</Typography>
-                <Typography>{gameData[0].developer}</Typography>
-                <Typography className={classes.gameLabel}>Release Year:</Typography>
-                <Typography>{gameData[0].release_year}</Typography>
+                
+                
                 <Typography className={classes.gameLabel}>Rating:</Typography>
                 <Typography>{gameData[0].rating}</Typography>
                 <Typography className={classes.gameLabel}>Description:</Typography>
