@@ -17,6 +17,7 @@ import {    AdminLayout,
             ProfileLayout,
             MainLayout,
             NewsLayout,
+            SearchResultPageLayout,
             SignInLayout,
             SignUpLayout
         } from './layouts';
@@ -76,6 +77,7 @@ export const App = () => {
                                                                 <Route path={'gamePage/:id'} element={<GamePage />} />
 
                                                                 <Route path={'contact'} element={<ContactLayout />} />
+                                                                <Route path={'search-result/:searchKey'} element={<SearchResultPageLayout />} />
                                                         </Routes>
                                                     </SectionContainer>
                                                 </div>

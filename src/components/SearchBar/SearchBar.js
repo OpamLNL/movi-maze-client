@@ -1,25 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { TextField, IconButton, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import MicIcon from '@mui/icons-material/Mic';
 import MicOffIcon from '@mui/icons-material/MicOff';
 import WebkitSpeechRecognizer from '../../services/WebkitSpeechRecognizer';
+import { LanguageContext } from "../../language/language-context";
+
+import searchBarLocales from './searchBarLocales.json';
 
 const speechRecognizer = new WebkitSpeechRecognizer();
 
-export const SearchBar = ({ onSearch }) => {
+export const SearchBar = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [isListening, setIsListening] = useState(false);
+    const navigate = useNavigate();
+    const language = useContext(LanguageContext);
 
     useEffect(() => {
         speechRecognizer.onResult((result) => {
             setSearchQuery(result);
+            navigate(`/search-result/${result}`);
             speechRecognizer.stop();
         });
+
         speechRecognizer.onError((error) => {
             console.error('Speech recognition error:', error);
             setIsListening(false);
         });
+
         speechRecognizer.onEnd(() => {
             setIsListening(false);
             speechRecognizer.stop();
@@ -28,10 +38,12 @@ export const SearchBar = ({ onSearch }) => {
         return () => {
             speechRecognizer.stop();
         };
-    }, []);
+    }, [navigate]);
 
     const handleSearch = () => {
-        onSearch(searchQuery);
+        if (searchQuery) {
+            navigate(`/search-result/${searchQuery}`);
+        }
         speechRecognizer.stop();
         setIsListening(false);
     };
@@ -47,7 +59,10 @@ export const SearchBar = ({ onSearch }) => {
 
     return (
         <TextField
-            label="Пошук"
+            label={
+                searchBarLocales.find(item => item.hasOwnProperty('searchString'))
+                    ?.searchString[language.language] || ''
+            }
             variant="outlined"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
