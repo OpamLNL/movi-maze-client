@@ -173,10 +173,11 @@ export const AdminPage = () => {
 
     return (
         <Container className={classes.container}>
-            <div className={css.userFunction}>
-                        <div>
+            <div>
                     <h1>Адміністративна панель</h1>
-                </div>
+            </div>
+            <div className={css.userFunction}>
+                       
 
                         <div className={css.userFunction}>
                             <Button onClick={toggleShowUsers}>
